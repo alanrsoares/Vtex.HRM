@@ -2,7 +2,7 @@
 
 angular.module('vtex-hrm.services', ['ngResource'])
     .factory('checks', function ($resource) {
-        return $resource('https://"alertawebstore@vtex.com.br:vtexonline1"@api.pingdom.com/api/2.0/checks/:checkId', {}, {
+        return $resource('https://"alertawebstore@vtex.com.br:vtexonline1"@api.pingdom.com/api/2.0/checks/:checkId', {
             query: {
                 method: 'GET',
                 params: { checkId: '' },
