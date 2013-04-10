@@ -1,80 +1,89 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-
-namespace Pingdom.Client
+﻿namespace Pingdom.Client
 {
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web;
+    using Controllers;
+
     public class PingdomBaseClient
     {
         private readonly WebClient _baseWebClient;
 
         private readonly string _baseUrl;
 
+        private readonly PingdomClientConfiguration _configuration;
+
         public PingdomBaseClient()
         {
-            var configuration = new
-                                    {
-                                        AppKey = GetConfigurationKey("AppKey"),
-                                        Version = GetConfigurationKey("Version"),
-                                        BaseUrl = GetConfigurationKey("BaseUrl"),
-                                        UserName = GetConfigurationKey("UserName"),
-                                        Password = GetConfigurationKey("Password"),
-                                    };
+            _configuration = new PingdomClientConfiguration();
 
-            _baseUrl = string.Format(configuration.BaseUrl, configuration.Version);
+            _baseUrl = string.Format(_configuration.BaseUrl, _configuration.Version);
 
             _baseWebClient = new WebClient
                               {
-                                  Credentials = new NetworkCredential(configuration.UserName, configuration.Password),
+                                  Credentials = new NetworkCredential(_configuration.UserName, _configuration.Password),
                                   Headers = new WebHeaderCollection
                                                 {
-                                                    { "app-key", configuration.AppKey },
+                                                    { "app-key", _configuration.AppKey },
                                                     { HttpRequestHeader.ContentType, "application/x-www-form-urlencoded" }
                                                 },
                               };
         }
 
+        #region Rest Methods
+        public JsonStringResult Get(string apiMethod)
+        {
+            return new JsonStringResult(_baseWebClient.DownloadString(GetUri(apiMethod)));
+        }
+
+        public JsonStringResult Post(string apiMethod, object data)
+        {
+            return new JsonStringResult(UploadString(apiMethod, data, HttpMethod.Post));
+        }
+
+        public JsonStringResult Put(string apiMethod, object data)
+        {
+            return new JsonStringResult(UploadString(apiMethod, data, HttpMethod.Put));
+        }
+
+        public JsonStringResult Delete(string apiMethod)
+        {
+            return new JsonStringResult(UploadString(apiMethod, HttpMethod.Delete));
+        }
+
+        public JsonStringResult Delete(string apiMethod, object data)
+        {
+            return new JsonStringResult(UploadString(apiMethod, data, HttpMethod.Delete));
+        }
+        #endregion
+
+        #region Private Methods
+
         private Uri GetUri(string apiMethod)
         {
-            return new Uri(_baseUrl + apiMethod);
+            return new Uri(string.Concat(_baseUrl, apiMethod));
         }
 
-        private string GetConfigurationKey(string key)
+        private dynamic UploadString(string apiMethod, HttpMethod httpMethod)
         {
-            return ConfigurationManager.AppSettings[string.Format("pingdomAPI:{0}", key)];
-        }
-
-        public dynamic Get(string apiMethod)
-        {
-            return _baseWebClient.DownloadString(GetUri(apiMethod));
-        }
-
-        public dynamic Post(string apiMethod, object data)
-        {
-            return UploadString(apiMethod, data, HttpMethod.Post);
-        }
-
-        public dynamic Put(string apiMethod, string data)
-        {
-            return UploadString(apiMethod, data, HttpMethod.Put);
-        }
-
-        public dynamic Delete(string apiMethod, string data)
-        {
-            return UploadString(apiMethod, data, HttpMethod.Delete);
+            return UploadString(apiMethod, null, httpMethod);
         }
 
         private dynamic UploadString(string apiMethod, object data, HttpMethod httpMethod)
         {
-            var serializedData = GetQueryString(data);
             var uri = GetUri(apiMethod);
+
+            if (data == null)
+                return _baseWebClient.UploadString(uri, httpMethod.ToString());
+
+            var serializedData = GetQueryString(data);
+
             return _baseWebClient.UploadString(uri, httpMethod.ToString(), serializedData);
         }
 
-        private string GetQueryString(object anonymousObject)
+        private static string GetQueryString(object anonymousObject)
         {
             var properties = from propertyInfo in anonymousObject.GetType().GetProperties()
                              where propertyInfo.GetValue(anonymousObject, null) != null
@@ -82,5 +91,7 @@ namespace Pingdom.Client
 
             return String.Join("&", properties.ToArray());
         }
+        #endregion
+
     }
 }

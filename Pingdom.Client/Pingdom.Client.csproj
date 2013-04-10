@@ -34,10 +34,13 @@
       <HintPath>..\Vtex.HRM.Web\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,11 +48,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ActionsController.cs" />
+    <Compile Include="Controllers\AnalysisController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Controllers\ChecksController.cs" />
     <Compile Include="PingdomBaseClient.cs" />
     <Compile Include="PingdomClient.cs" />
-    <Compile Include="PingdomContollers.cs" />
+    <Compile Include="JsonStringResult.cs" />
+    <Compile Include="PingdomClientConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceController.cs" />
+    <Compile Include="Resources.cs" />
+    <Compile Include="WebApi\ActionsController.cs" />
+    <Compile Include="WebApi\AnalysisController.cs" />
+    <Compile Include="WebApi\ChecksController.cs" />
+    <Compile Include="WebApi\ContactsController.cs" />
+    <Compile Include="Contracts\Checks\ModifyMultipleChecksRequest.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
