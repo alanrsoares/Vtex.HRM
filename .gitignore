@@ -11,7 +11,7 @@ TestResults
 # User-specific files
 *.suo
 *.v11.suo
-*.dll
+#*.dll
 *.user
 *.sln.docstates
 
