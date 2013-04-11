@@ -1,6 +1,6 @@
 ﻿namespace Pingdom.Client
 {
-    using Newtonsoft.Json;
+    using ServiceStack.Text;
 
     public class JsonStringResult
     {
@@ -13,7 +13,7 @@
 
         public object ToObject()
         {
-            return JsonConvert.DeserializeObject(_actionResponse);
+            return _actionResponse.FromJson<JsonObject>();
         }
 
         public JsonStringResult(string actionResponse)
