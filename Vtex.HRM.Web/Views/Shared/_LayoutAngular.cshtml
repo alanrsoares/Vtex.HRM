@@ -1,25 +1,90 @@
-﻿<!doctype html>
-<html ng-app="myApp">
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="hrm">
 <head>
-  <meta charset="utf-8">
-  <title>My AngularJS App</title>
-  <link rel="stylesheet" href="/css/app.css"/>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Online Currency Converter - Get realtime currency exchange rates! Powered by Google's Finance API.">
+    <meta name="author" content="https://github.com/alanrsoares">
+
+    <!-- Le styles -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+
+        .container-narrow {
+            max-width: 400px;
+            margin: auto;
+        }
+    </style>
+
+    <link href="~/Content/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    @*
+    <link rel="shortcut icon" href="~/Content/icons/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/icons/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/icons/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/icons/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Content/icons/apple-touch-icon-57-precomposed.png">
+    *@
+
+    @RenderSection("styles", false)
+
 </head>
+
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
 
-  @RenderBody()
-  
-  <div>Angular seed app: v<span app-version></span></div>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a id="menuToggler" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#">VTEX-HRM</a>
+                <div id="collapser" class="nav-collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#/resources">Resources</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
 
-  <script src="/lib/angular/angular.js"></script>
-  <script src="/js/app.js"></script>
-  <script src="/js/services.js"></script>
-  <script src="/js/controllers.js"></script>
-  <script src="/js/filters.js"></script>
-  <script src="/js/directives.js"></script>
+    @RenderSection("featured", false)
+
+    <div class="container">
+
+        @RenderBody()
+
+    </div>
+    <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-ui.min.js"></script>
+    <script type="text/javascript" src="~/App/app.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-resource.js"></script>
+    <script type="text/javascript" src="~/App/services.js"></script>
+    <script type="text/javascript" src="~/App/controllers.js"></script>
+
+    @RenderSection("scripts", false)
+
 </body>
 </html>

@@ -173,6 +173,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\partials\resources.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\angular-ui.css" />
     <Content Include="Content\angular-ui.min.css" />
@@ -262,18 +263,13 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="js\app.js" />
-    <Content Include="js\controllers.js" />
-    <Content Include="js\directives.js" />
-    <Content Include="js\filters.js" />
-    <Content Include="js\services.js" />
-    <Content Include="lib\angular\angular-loader.js" />
-    <Content Include="lib\angular\angular-loader.min.js" />
-    <Content Include="lib\angular\angular.js" />
-    <Content Include="lib\angular\angular.min.js" />
-    <Content Include="lib\angular\version.txt" />
-    <Content Include="partials\partial1.html" />
-    <Content Include="partials\partial2.html" />
+    <Content Include="App\app.js" />
+    <Content Include="App\controllers.js" />
+    <Content Include="App\directives.js" />
+    <Content Include="App\filters.js" />
+    <Content Include="App\services.js" />
+    <Content Include="App\partials\home.html" />
+    <Content Include="App\partials\resources\checks.html" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
