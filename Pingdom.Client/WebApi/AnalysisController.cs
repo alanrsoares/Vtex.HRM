@@ -9,13 +9,13 @@
         // GET api/analysis/9
         public dynamic Get(int checkId)
         {
-            return _resource.GetRootCauseAnalysisResultsList(checkId).ToObject();
+            return _resource.GetRootCauseAnalysisResultsList(checkId).ToDynamicObject();
         }
 
         // GET api/analysis/5/6
         public dynamic Get(int checkId, int analysisId)
         {
-            return _resource.GetRawAnalysisResults(checkId, analysisId).ToObject();
+            return _resource.GetRawAnalysisResults(checkId, analysisId).ToDynamicObject();
         }
 
         // POST api/checks

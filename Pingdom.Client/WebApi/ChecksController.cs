@@ -18,19 +18,19 @@ namespace Pingdom.Client.WebApi
         // GET api/checks
         public dynamic Get()
         {
-            return _resource.GetChecksList().ToObject();
+            return _resource.GetChecksList().ToDynamicObject();
         }
 
         // GET api/checks/5
         public dynamic Get(int id)
         {
-            return _resource.GetDetailedCheckInformation(id).ToObject();
+            return _resource.GetDetailedCheckInformation(id).ToDynamicObject();
         }
 
         // POST api/checks
         public dynamic Post([FromBody]object check)
         {
-            return _resource.CreateNewCheck(check).ToObject();
+            return _resource.CreateNewCheck(check).ToDynamicObject();
         }
 
         // PUT api/checks/5

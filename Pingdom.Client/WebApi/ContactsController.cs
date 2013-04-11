@@ -9,7 +9,7 @@
         // GET api/contacts
         public dynamic Get()
         {
-            return _resource.GetContactsList().ToObject();
+            return _resource.GetContactsList().ToDynamicObject();
         }
     }
 }

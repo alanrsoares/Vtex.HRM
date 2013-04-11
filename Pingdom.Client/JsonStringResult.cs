@@ -1,24 +1,24 @@
 ﻿namespace Pingdom.Client
 {
-    using ServiceStack.Text;
+    using Newtonsoft.Json;
 
     public class JsonStringResult
     {
-        private readonly string _actionResponse;
+        private readonly string _jsonString;
 
         public override string ToString()
         {
-            return _actionResponse;
+            return _jsonString;
         }
 
-        public object ToObject()
+        public dynamic ToDynamicObject()
         {
-            return _actionResponse.FromJson<JsonObject>();
+            return JsonConvert.DeserializeObject(_jsonString);
         }
 
-        public JsonStringResult(string actionResponse)
+        public JsonStringResult(string jsonString)
         {
-            _actionResponse = actionResponse;
+            _jsonString = jsonString;
         }
     }
 }

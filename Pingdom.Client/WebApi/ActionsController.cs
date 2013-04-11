@@ -9,7 +9,7 @@
         // GET api/actions
         public dynamic Get()
         {
-            return _resource.GetActionsList().ToObject();
+            return _resource.GetActionsList().ToDynamicObject();
         }
     }
 }
