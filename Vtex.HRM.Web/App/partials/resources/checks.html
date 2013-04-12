@@ -1,62 +1,167 @@
 <section id="checks" ng-controller="ChecksCtrl">
 
+    <div class="page-header">
+        <h1>Checks <small><a href="/api/checks" target="_blank">/api/checks</a></small></h1>
+    </div>
+
     <span ng-show="!checks">Loading checks...</span>
 
-    <div ng-show="checks" data-fade="1" ngmodel="activeTab" bs-tabs>
-        <div data-title="All">
-            <p>
-                <ul>
-                    <li ng-repeat="check in checks">
-                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
-                    </li>
-                </ul>
-            </p>
-        </div>
+    <div id="checkTabs" ng-show="checks">
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active">
+                <a showtab href="#all">All <span class="badge">{{checks.length}}</span></a>
+            </li>
+            <li>
+                <a showtab href="#up">Up <span class="badge badge-success">{{up.length}}</span></a>
+            </li>
+            <li>
+                <a showtab href="#down">Down <span class="badge badge-important">{{down.length}}</span></a>
+            </li>
+            <li>
+                <a showtab href="#stable">Stable <span class="badge badge-info">{{stable.length}}</span></a>
+            </li>
+            <li>
+                <a showtab href="#beta">Beta <span class="badge badge-warning">{{beta.length}}</span></a>
+            </li>
+        </ul>
 
-        <div data-title="UP ({{up.length}})">
-            <p>
-                Up Services - <span class="badge badge-success">{{up.length}}</span>
-                <ul>
-                    <li ng-repeat="check in up">
-                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
-                    </li>
-                </ul>
-            </p>
+        <div class="tab-content">
+            <div class="tab-pane active" id="all">
+                <p>
+                    <div class="alert alert-info">
+                        <strong>All</strong> Services
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Host</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="check in checks">
+                                <td>{{check.id}}</td>
+                                <td>{{check.name}}</td>
+                                <td>{{check.hostname}}</td>
+                                <td><i class="icon-arrow-{{check.status}}"></i></td>
+                                <td>
+                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p>
+            </div>
+            <div class="tab-pane" id="up">
+                <p>
+                    <div class="alert alert-info">
+                        <strong>UP</strong> Services
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Host</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="check in up">
+                                <td>{{check.id}}</td>
+                                <td>{{check.name}}</td>
+                                <td>{{check.hostname}}</td>
+                                <td><i class="icon-arrow-{{check.status}}"></i></td>
+                                <td>
+                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p>
+            </div>
+            <div class="tab-pane" id="down">
+                <p>
+                    <div class="alert alert-info">
+                        <strong>DOWN</strong> Services
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Host</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="check in down">
+                                <td>{{check.id}}</td>
+                                <td>{{check.name}}</td>
+                                <td>{{check.hostname}}</td>
+                                <td><i class="icon-arrow-{{check.status}}"></i></td>
+                                <td>
+                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p>
+            </div>
+            <div class="tab-pane" id="stable">
+                <p>
+                    <div class="alert alert-info">
+                        <strong>STABLE</strong> Version Services
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Host</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="check in stable">
+                                <td>{{check.id}}</td>
+                                <td>{{check.name}}</td>
+                                <td>{{check.hostname}}</td>
+                                <td><i class="icon-arrow-{{check.status}}"></i></td>
+                                <td>
+                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p>
+            </div>
+            <div class="tab-pane" id="beta">
+                <p>
+                    <div class="alert alert-info">
+                        <strong>BETA</strong> Version Services
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Host</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="check in beta">
+                                <td>{{check.id}}</td>
+                                <td>{{check.name}}</td>
+                                <td>{{check.hostname}}</td>
+                                <td><i class="icon-arrow-{{check.status}}"></i></td>
+                                <td>
+                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p>
+            </div>
         </div>
-
-        <div data-title="DOWN ({{down.length}})">
-            <p>
-                Down Services - <span class="badge badge-important">{{down.length}}</span>
-                <ul>
-                    <li ng-repeat="check in down">
-                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
-                    </li>
-                </ul>
-            </p>
-        </div>
-
-        <div data-title="STABLE ({{stable.length}})">
-            <p>
-                Beta Services - <span class="badge badge-info">{{stable.length}}</span>
-                <ul>
-                    <li ng-repeat="check in stable">
-                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
-                    </li>
-                </ul>
-            </p>
-        </div>
-
-        <div data-title="BETA ({{beta.length}})">
-            <p>
-                Beta Services - <span class="badge badge-warning">{{beta.length}}</span>
-                <ul>
-                    <li ng-repeat="check in beta">
-                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
-                    </li>
-                </ul>
-            </p>
-        </div>
-
     </div>
 
 </section>
