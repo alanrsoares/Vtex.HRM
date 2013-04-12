@@ -1,9 +1,62 @@
-<div ng-controller="ChecksCtrl">
+<section id="checks" ng-controller="ChecksCtrl">
+
     <span ng-show="!checks">Loading checks...</span>
 
-    <ul>
-        <li ng-repeat="check in checks">
-            <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
-        </li>
-    </ul>
-</div>
+    <div ng-show="checks" data-fade="1" ngmodel="activeTab" bs-tabs>
+        <div data-title="All">
+            <p>
+                <ul>
+                    <li ng-repeat="check in checks">
+                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
+                    </li>
+                </ul>
+            </p>
+        </div>
+
+        <div data-title="UP ({{up.length}})">
+            <p>
+                Up Services - <span class="badge badge-success">{{up.length}}</span>
+                <ul>
+                    <li ng-repeat="check in up">
+                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
+                    </li>
+                </ul>
+            </p>
+        </div>
+
+        <div data-title="DOWN ({{down.length}})">
+            <p>
+                Down Services - <span class="badge badge-important">{{down.length}}</span>
+                <ul>
+                    <li ng-repeat="check in down">
+                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
+                    </li>
+                </ul>
+            </p>
+        </div>
+
+        <div data-title="STABLE ({{stable.length}})">
+            <p>
+                Beta Services - <span class="badge badge-info">{{stable.length}}</span>
+                <ul>
+                    <li ng-repeat="check in stable">
+                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
+                    </li>
+                </ul>
+            </p>
+        </div>
+
+        <div data-title="BETA ({{beta.length}})">
+            <p>
+                Beta Services - <span class="badge badge-warning">{{beta.length}}</span>
+                <ul>
+                    <li ng-repeat="check in beta">
+                        <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
+                    </li>
+                </ul>
+            </p>
+        </div>
+
+    </div>
+
+</section>

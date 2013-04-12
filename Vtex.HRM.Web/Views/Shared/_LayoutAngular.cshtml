@@ -43,7 +43,7 @@
 
 <body>
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top" bs-navbar>
         <div class="navbar-inner">
             <div class="container" style="background: url(http://icons.iconarchive.com/icons/banzaitokyo/medico/32/ecg-icon.png) no-repeat top 4px left 1px">
                 <a id="menuToggler" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -51,20 +51,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     VTEX-HRM
                 </a>
                 <div id="collapser" class="nav-collapse">
                     <ul class="nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#/resources">Resources</a></li>
+                        <li data-match-route="/"><a href="#/">Home</a></li>
+                        <li data-match-route="/resources"><a href="#/resources">Resources</a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
             </div>
         </div>
     </div>
+    
 
     @RenderSection("featured", false)
 
@@ -79,13 +79,14 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/angular-ui.min.js"></script>
-    <script type="text/javascript" src="~/App/app.js"></script>
-    <script type="text/javascript" src="~/Scripts/angular-resource.js"></script>
-    <script type="text/javascript" src="~/App/services.js"></script>
-    <script type="text/javascript" src="~/App/controllers.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script src="~/Scripts/angular-strap.min.js"></script>
+    <script src="~/Scripts/angular-resource.js"></script>
+    <script src="~/App/app.js"></script>
+    <script src="~/App/services.js"></script>
+    <script src="~/App/controllers.js"></script>
 
     @RenderSection("scripts", false)
 

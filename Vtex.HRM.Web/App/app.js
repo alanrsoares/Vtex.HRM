@@ -1,7 +1,7 @@
 
 'use strict';
 
-var app = angular.module('hrm', ['hrm.services']).
+var app = angular.module('hrm', ['hrm.services', '$strap.directives']).
 config(function ($routeProvider) {
     $routeProvider
         .when('/', {
