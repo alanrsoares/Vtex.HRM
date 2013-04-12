@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web;
+using WebAPI.OutputCache;
 
 namespace Pingdom.Client.WebApi
 {
@@ -16,12 +17,14 @@ namespace Pingdom.Client.WebApi
         private readonly Controllers.ChecksController _resource = Resources.Checks;
 
         // GET api/checks
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         public dynamic Get()
         {
             return _resource.GetChecksList().ToDynamicObject();
         }
 
         // GET api/checks/5
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         public dynamic Get(int id)
         {
             return _resource.GetDetailedCheckInformation(id).ToDynamicObject();

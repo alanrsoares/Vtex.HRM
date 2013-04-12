@@ -1,9 +1,30 @@
 
-var HrmController = function($scope, $http, Checks) {};
+var MainCtrl = function ($scope, $http) { };
 
-var ResourcesController = function ($scope, $http, Checks) {
+var ResourcesRouteCtrl = function ($scope, $routeParams) {
 
-    Checks.get(function (data) {
+    if (typeof $routeParams.resource !== "undefined") {
+
+        if (typeof $routeParams.id !== "undefined") {
+            //is detail
+            $scope.templateUrl = '/app/partials/resources/' + $routeParams.resource + 'Detail.html';
+        }
+        else {
+            $scope.templateUrl = '/app/partials/resources/' + $routeParams.resource + '.html';
+        }
+    }
+};
+
+var ResourcesCtrl = function ($scope, $http, checks) { };
+
+var ChecksCtrl = function ($scope, $http, checks) {
+    checks.get(function (data) {
         $scope.checks = data.checks;
+    });
+};
+
+var ChecksDetailCtrl = function ($scope, $http, $routeParams, checks) {
+    checks.get({ checkId: $routeParams.id }, function (data) {
+        $scope.check = data.check;
     });
 };

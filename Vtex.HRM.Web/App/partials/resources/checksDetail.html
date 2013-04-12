@@ -1,0 +1,10 @@
+<div ng-controller="ChecksDetailCtrl">
+    <span ng-show="!check">Loading check...</span>
+
+    <ul ng-show="check">
+        <li>Nome = {{check.name}}
+        </li>
+        <li>CheckUrl = {{check.hostname + check.type.http.url}}</li>
+    </ul>
+
+</div>

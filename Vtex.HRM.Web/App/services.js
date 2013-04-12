@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hrm.services', ['ngResource'])
-    .factory('Checks', function ($resource) {
+    .factory('checks', function ($resource) {
         return $resource('/api/checks/:checkId', {}, {
             query: {
                 method: 'GET',

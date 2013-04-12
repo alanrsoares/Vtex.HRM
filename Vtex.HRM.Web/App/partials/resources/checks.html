@@ -1,7 +1,9 @@
-<span ng-show="!checks">Loading checks...</span>
+<div ng-controller="ChecksCtrl">
+    <span ng-show="!checks">Loading checks...</span>
 
-<ul>
-    <li ng-repeat="check in checks">
-        {{check.id}} - {{check.name}}
-    </li>
-</ul>
+    <ul>
+        <li ng-repeat="check in checks">
+            <a href="#/resources/checks/{{check.id}}">{{check.id}} - {{check.name}}</a>
+        </li>
+    </ul>
+</div>
