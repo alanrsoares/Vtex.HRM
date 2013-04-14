@@ -9,29 +9,42 @@
     <div id="checkTabs" ng-show="checks">
         <ul class="nav nav-tabs" id="myTab">
             <li class="active">
-                <a showtab href="#all">All <span class="badge">{{checks.length}}</span></a>
+                <a showtab href="#filtered" ng-click="filtered=checks; tabName='ALL'">All <span class="badge">{{checks.length}}</span>
+                </a>
             </li>
             <li>
-                <a showtab href="#up">Up <span class="badge badge-success">{{up.length}}</span></a>
+                <a showtab href="#filtered" ng-click="filtered=up; tabName='UP'">Up <span class="badge badge-success">{{up.length}}</span>
+                </a>
             </li>
             <li>
-                <a showtab href="#down">Down <span class="badge badge-important">{{down.length}}</span></a>
+                <a showtab href="#filtered" ng-click="filtered=down; tabName='DOWN'">Down <span class="badge badge-important">{{down.length}}</span>
+                </a>
             </li>
             <li>
-                <a showtab href="#stable">Stable <span class="badge badge-info">{{stable.length}}</span></a>
+                <a showtab href="#filtered" ng-click="filtered=stable; tabName='STABLE'">Stable <span class="badge badge-info">{{stable.length}}</span>
+                </a>
             </li>
             <li>
-                <a showtab href="#beta">Beta <span class="badge badge-warning">{{beta.length}}</span></a>
+                <a showtab href="#filtered" ng-click="filtered=beta; tabName='BETA'">Beta <span class="badge badge-warning">{{beta.length}}</span>
+                </a>
             </li>
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane active" id="all">
+
+            <div class="tab-pane active" id="filtered">
                 <p>
                     <div class="alert alert-info">
-                        <strong>All</strong> Services
+                        <strong>{{tabName}}</strong> Services
                     </div>
-                    <table class="table">
+
+                    <div>
+                        <form class="form-search">
+                            <input class="input-small search-query" ng-model="query.name" type="text" placeholder="filtro" />
+                        </form>
+                    </div>
+
+                    <table class="table table-striped table-hover">
                         <thead>
                             <th>ID</th>
                             <th>Nome</th>
@@ -40,11 +53,11 @@
                             <th>Actions</th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="check in checks">
+                            <tr ng-repeat="check in filtered | filter:query" ng-class="{error: check.status=='down'}">
                                 <td>{{check.id}}</td>
                                 <td>{{check.name}}</td>
                                 <td>{{check.hostname}}</td>
-                                <td><i class="icon-arrow-{{check.status}}"></i></td>
+                                <td><i ng-class="{up:'icon-ok', down:'icon-remove'}[check.status]"></i></td>
                                 <td>
                                     <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
                                 </td>
@@ -53,114 +66,7 @@
                     </table>
                 </p>
             </div>
-            <div class="tab-pane" id="up">
-                <p>
-                    <div class="alert alert-info">
-                        <strong>UP</strong> Services
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Host</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="check in up">
-                                <td>{{check.id}}</td>
-                                <td>{{check.name}}</td>
-                                <td>{{check.hostname}}</td>
-                                <td><i class="icon-arrow-{{check.status}}"></i></td>
-                                <td>
-                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </p>
-            </div>
-            <div class="tab-pane" id="down">
-                <p>
-                    <div class="alert alert-info">
-                        <strong>DOWN</strong> Services
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Host</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="check in down">
-                                <td>{{check.id}}</td>
-                                <td>{{check.name}}</td>
-                                <td>{{check.hostname}}</td>
-                                <td><i class="icon-arrow-{{check.status}}"></i></td>
-                                <td>
-                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </p>
-            </div>
-            <div class="tab-pane" id="stable">
-                <p>
-                    <div class="alert alert-info">
-                        <strong>STABLE</strong> Version Services
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Host</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="check in stable">
-                                <td>{{check.id}}</td>
-                                <td>{{check.name}}</td>
-                                <td>{{check.hostname}}</td>
-                                <td><i class="icon-arrow-{{check.status}}"></i></td>
-                                <td>
-                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </p>
-            </div>
-            <div class="tab-pane" id="beta">
-                <p>
-                    <div class="alert alert-info">
-                        <strong>BETA</strong> Version Services
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Host</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="check in beta">
-                                <td>{{check.id}}</td>
-                                <td>{{check.name}}</td>
-                                <td>{{check.hostname}}</td>
-                                <td><i class="icon-arrow-{{check.status}}"></i></td>
-                                <td>
-                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </p>
-            </div>
+
         </div>
     </div>
 

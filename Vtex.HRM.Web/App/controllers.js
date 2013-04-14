@@ -26,6 +26,8 @@ var ResourcesCtrl = function () { };
 //#region Checks
 var ChecksCtrl = function ($scope, $http, $window, $location, checks) {
 
+    $scope.filtered = [];
+
     // get all checks
     checks.get(function (data) {
         $scope.checks = data.checks;
@@ -39,6 +41,10 @@ var ChecksCtrl = function ($scope, $http, $window, $location, checks) {
             var pattern = /- Stable/;
             return pattern.test(check.name);
         });
+
+        $scope.filtered = $scope.checks;
+        $scope.tabName = "ALL";
+
     });
 };
 
