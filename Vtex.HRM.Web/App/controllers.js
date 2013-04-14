@@ -7,11 +7,15 @@ var baseController = (function () {
     return baseController;
 });
 
-var MainCtrl = function () { };
+var MainCtrl = function($rootScope) {
+    $rootScope.pageTitle = "Home";
+};
 
-var ResourcesRouteCtrl = function ($scope, $routeParams) {
+var ResourcesRouteCtrl = function ($scope, $rootScope, $routeParams) {
 
     if ($routeParams.resource) {
+        
+        $rootScope.pageTitle = $routeParams.resource;
 
         $scope.templateUrl = $routeParams.id
                 ? $scope.templateUrl = '/app/partials/resources/' + $routeParams.resource + 'Detail.html'
@@ -19,12 +23,14 @@ var ResourcesRouteCtrl = function ($scope, $routeParams) {
     }
 };
 
-var ResourcesCtrl = function () { };
+var ResourcesCtrl = function($rootScope) {
+    $rootScope.pageTitle = "Resources";
+};
 
 //#region Resource Controllers
 
 //#region Checks
-var ChecksCtrl = function ($scope, checks) {
+var ChecksCtrl = function ($scope, $rootScope, checks) {
 
     $scope.filtered = [];
 
@@ -48,12 +54,13 @@ var ChecksCtrl = function ($scope, checks) {
     });
 };
 
-var ChecksDetailCtrl = function ($scope, $routeParams, checks) {
+var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks) {
 
     // get detailed check :id
     $scope.checkId = $routeParams.id;
     
     checks.get({ checkId: $routeParams.id }, function (data) {
+        $rootScope.pageTitle = data.check.name;
         $scope.check = data.check;
     });
 };
