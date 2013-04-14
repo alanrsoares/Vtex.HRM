@@ -24,7 +24,7 @@ var ResourcesCtrl = function () { };
 //#region Resource Controllers
 
 //#region Checks
-var ChecksCtrl = function ($scope, $http, $window, $location, checks) {
+var ChecksCtrl = function ($scope, checks) {
 
     $scope.filtered = [];
 
@@ -48,9 +48,11 @@ var ChecksCtrl = function ($scope, $http, $window, $location, checks) {
     });
 };
 
-var ChecksDetailCtrl = function ($scope, $http, $routeParams, checks) {
+var ChecksDetailCtrl = function ($scope, $routeParams, checks) {
 
     // get detailed check :id
+    $scope.checkId = $routeParams.id;
+    
     checks.get({ checkId: $routeParams.id }, function (data) {
         $scope.check = data.check;
     });

@@ -1,4 +1,11 @@
-<div ng-controller="ChecksDetailCtrl">
+<section id="checksDetail" ng-controller="ChecksDetailCtrl">
+    <div class="page-header">
+        <h1>{{check.name}}
+            <small>
+                <a href="/api/checks/{{check.id}}" target="_blank">/api/checks/{{check.id}}</a>
+            </small></h1>
+    </div>
+
     <span ng-show="!check">Loading check...</span>
 
     <ul ng-show="check">
@@ -9,4 +16,4 @@
         <li>Created: {{check.created | unixDate}}</li>
     </ul>
 
-</div>
+</section>
