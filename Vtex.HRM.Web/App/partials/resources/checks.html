@@ -7,25 +7,30 @@
     <span ng-show="!checks">Loading checks...</span>
 
     <div id="checkTabs" ng-show="checks">
-        <ul class="nav nav-tabs" id="myTab">
+        <ul class="nav nav-tabs" id="checkTabsList">
             <li class="active">
-                <a showtab href="#filtered" ng-click="filtered=checks; tabName='ALL'">All <span class="badge">{{checks.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=checks; tabName='ALL'">
+                    All <span class="badge">{{checks.length}}</span>
                 </a>
             </li>
             <li>
-                <a showtab href="#filtered" ng-click="filtered=up; tabName='UP'">Up <span class="badge badge-success">{{up.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=up; tabName='UP'">
+                    Up <span class="badge badge-success">{{up.length}}</span>
                 </a>
             </li>
             <li>
-                <a showtab href="#filtered" ng-click="filtered=down; tabName='DOWN'">Down <span class="badge badge-important">{{down.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=down; tabName='DOWN'">
+                    Down <span class="badge badge-important">{{down.length}}</span>
                 </a>
             </li>
             <li>
-                <a showtab href="#filtered" ng-click="filtered=stable; tabName='STABLE'">Stable <span class="badge badge-info">{{stable.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=stable; tabName='STABLE'">
+                    Stable <span class="badge badge-info">{{stable.length}}</span>
                 </a>
             </li>
             <li>
-                <a showtab href="#filtered" ng-click="filtered=beta; tabName='BETA'">Beta <span class="badge badge-warning">{{beta.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=beta; tabName='BETA'">
+                    Beta <span class="badge badge-warning">{{beta.length}}</span>
                 </a>
             </li>
         </ul>
@@ -40,7 +45,7 @@
 
                     <div>
                         <form class="form-search">
-                            <input class="input-small search-query" ng-model="query.name" type="text" placeholder="filtro" />
+                            <input class="input-small search-query" ng-model="query" type="text" placeholder="filtro" />
                         </form>
                     </div>
 
