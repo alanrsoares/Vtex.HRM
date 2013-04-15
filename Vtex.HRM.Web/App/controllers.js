@@ -7,14 +7,14 @@ var baseController = (function () {
     return baseController;
 });
 
-var MainCtrl = function($rootScope) {
+var MainCtrl = function ($rootScope) {
     $rootScope.pageTitle = "Home";
 };
 
 var ResourcesRouteCtrl = function ($scope, $rootScope, $routeParams) {
 
     if ($routeParams.resource) {
-        
+
         $rootScope.pageTitle = $routeParams.resource;
 
         $scope.templateUrl = $routeParams.id
@@ -23,7 +23,7 @@ var ResourcesRouteCtrl = function ($scope, $rootScope, $routeParams) {
     }
 };
 
-var ResourcesCtrl = function($rootScope) {
+var ResourcesCtrl = function ($rootScope) {
     $rootScope.pageTitle = "Resources";
 };
 
@@ -31,6 +31,20 @@ var ResourcesCtrl = function($rootScope) {
 
 //#region Checks
 var ChecksCtrl = function ($scope, $rootScope, checks) {
+
+    var paneOptions = {};
+
+    $scope.paneOptions = function (filtered, tabName, alertClass) {
+        if (arguments.length === 0) {
+            return paneOptions;
+        } else {
+            paneOptions = {
+                filtered: filtered,
+                alertClass: alertClass,
+                tabName: tabName
+            };
+        }
+    };
 
     $scope.filtered = [];
 
@@ -48,8 +62,8 @@ var ChecksCtrl = function ($scope, $rootScope, checks) {
             return pattern.test(check.name);
         });
 
-        $scope.filtered = $scope.checks;
-        $scope.tabName = "ALL";
+        // sets paneOptions initial state
+        $scope.paneOptions($scope.checks, 'ALL', 'info');
 
     });
 };
@@ -58,7 +72,7 @@ var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks) {
 
     // get detailed check :id
     $scope.checkId = $routeParams.id;
-    
+
     checks.get({ checkId: $routeParams.id }, function (data) {
         $rootScope.pageTitle = data.check.name;
         $scope.check = data.check;
