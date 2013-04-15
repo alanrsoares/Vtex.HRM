@@ -8,33 +8,19 @@
 
     <div id="checkTabs" ng-show="checks">
         <ul class="nav nav-tabs" id="checkTabsList">
-            <li class="active">
-                <a showtab href="#filtered" ng-click="paneOptions(checks,'ALL','info')">All <span class="badge">{{checks.length}}</span>
+
+            <li ng-repeat="tab in tabs" ng-class="{active: tab.active}">
+                <a showtab href="#filtered" ng-click="paneOptions(tab);">{{tab.label}} <span class="badge {{tab.badgeStyle}}">{{(tab.checks | filter:query).length}}</span>
                 </a>
             </li>
-            <li>
-                <a showtab href="#filtered" ng-click="paneOptions(up,'UP','success')">Up <span class="badge badge-success">{{up.length}}</span>
-                </a>
-            </li>
-            <li>
-                <a showtab href="#filtered" ng-click="paneOptions(down,'DOWN','error')">Down <span class="badge badge-important">{{down.length}}</span>
-                </a>
-            </li>
-            <li>
-                <a showtab href="#filtered" ng-click="paneOptions(stable,'STABLE','info')">Stable <span class="badge badge-info">{{stable.length}}</span>
-                </a>
-            </li>
-            <li>
-                <a showtab href="#filtered" ng-click="paneOptions(beta,'beta','warning')">Beta <span class="badge badge-warning">{{beta.length}}</span>
-                </a>
-            </li>
+
         </ul>
 
         <div class="tab-content">
 
             <div class="tab-pane active" id="filtered">
                 <p>
-                    <div class="alert alert-{{paneOptions().alertClass}}">
+                    <div class="alert {{paneOptions().alertStyle}}">
                         <strong>{{paneOptions().tabName}}</strong> Services
                     </div>
 
@@ -45,19 +31,18 @@
                     </div>
                     <table class="table table-striped table-hover">
                         <thead>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Host</th>
+                            <th>ID <i class="icon-s"></i></th>
+                            <th ng-click="order=name">Nome</th>
+                            <th ng-click="order=host">Host</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </thead>
                         <tbody>
                             <tr class="warning" ng-show="(paneOptions().filtered | filter:query).length==0">
-                                <td colspan="5" style="text-align: center">
-                                    nenhum resultado encontrado
+                                <td colspan="5" class="muted" style="text-align: center">nenhum resultado encontrado
                                 </td>
                             </tr>
-                            <tr ng-repeat="check in paneOptions().filtered | filter:query" ng-class="{error: check.status=='down'}">
+                            <tr ng-repeat="check in paneOptions().filtered | filter:query | orderBy:order" ng-class="{error: check.status=='down'}">
                                 <td>{{check.id}}</td>
                                 <td>{{check.name}}</td>
                                 <td>{{check.hostname}}</td>
