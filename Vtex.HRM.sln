@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pingdom.Client", "Pingdom.Client\Pingdom.Client.csproj", "{B36AFC49-C642-49FB-A49D-53504FC1170B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vtex.HRM.Web", "Vtex.HRM.Web\Vtex.HRM.Web.csproj", "{176BEAB1-9E99-4E48-8A18-D5C37F9DFC2E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6F9E4DC7-75D1-4DA5-AD4F-34494445D583} = {6F9E4DC7-75D1-4DA5-AD4F-34494445D583}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8318DFBA-59A9-4519-9277-B77637BB3690}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8318DF
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vtex.HRM.API", "Vtex.HRM.WebApi\Vtex.HRM.API.csproj", "{6F9E4DC7-75D1-4DA5-AD4F-34494445D583}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +31,10 @@ Global
 		{176BEAB1-9E99-4E48-8A18-D5C37F9DFC2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{176BEAB1-9E99-4E48-8A18-D5C37F9DFC2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{176BEAB1-9E99-4E48-8A18-D5C37F9DFC2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9E4DC7-75D1-4DA5-AD4F-34494445D583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9E4DC7-75D1-4DA5-AD4F-34494445D583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9E4DC7-75D1-4DA5-AD4F-34494445D583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9E4DC7-75D1-4DA5-AD4F-34494445D583}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

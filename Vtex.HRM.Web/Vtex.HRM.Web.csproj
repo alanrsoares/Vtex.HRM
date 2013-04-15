@@ -166,7 +166,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -508,6 +507,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -516,9 +516,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pingdom.Client\Pingdom.Client.csproj">
-      <Project>{B36AFC49-C642-49FB-A49D-53504FC1170B}</Project>
-      <Name>Pingdom.Client</Name>
+    <ProjectReference Include="..\Vtex.HRM.WebApi\Vtex.HRM.API.csproj">
+      <Project>{6f9e4dc7-75d1-4da5-ad4f-34494445d583}</Project>
+      <Name>Vtex.HRM.API</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -5,19 +5,19 @@ var app = angular.module('hrm', ['hrm.services', 'hrm.directives', 'hrm.filters'
 config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            controller: MainCtrl,
+            controller: 'MainCtrl',
             templateUrl: 'app/partials/home.html',
         })
         .when('/resources', {
-            controller: ResourcesCtrl,
+            controller: 'ResourcesCtrl',
             templateUrl: 'app/partials/resources.html',
         })
         .when('/resources/:resource', {
-            controller: ResourcesRouteCtrl,
+            controller: 'ResourcesRouteCtrl',
             templateUrl: 'app/partials/resources/urlRouter.html',
         })
         .when('/resources/:resource/:id', {
-            controller: ResourcesRouteCtrl,
+            controller: 'ResourcesRouteCtrl',
             templateUrl: 'app/partials/resources/urlRouter.html',
         });
 });

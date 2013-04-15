@@ -1,10 +1,11 @@
-﻿namespace Pingdom.Client.WebApi
-{
-    using System.Web.Http;
+﻿using System.Web.Http;
+using Pingdom.Client;
 
+namespace Vtex.HRM.WebApi.Controllers
+{
     public class ActionsController : ApiController
     {
-        private readonly Controllers.ActionsController _resource = Resources.Actions;
+        private readonly Pingdom.Client.Controllers.ActionsController _resource = Resources.Actions;
 
         // GET api/actions
         public dynamic Get()

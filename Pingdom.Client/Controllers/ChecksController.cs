@@ -1,7 +1,6 @@
 ﻿namespace Pingdom.Client.Controllers
 {
     using System.Collections.Generic;
-    using Contracts.Checks;
 
     public sealed class ChecksController : ResourceController
     {
@@ -25,7 +24,7 @@
             return Client.Put(string.Format("checks/{0}", checkId), check);
         }
 
-        public JsonStringResult ModifyMultipleChecks(ModifyMultipleChecksRequest modifyMultipleChecksRequest)
+        public JsonStringResult ModifyMultipleChecks(object modifyMultipleChecksRequest)
         {
             return Client.Put("checks/", modifyMultipleChecksRequest);
         }

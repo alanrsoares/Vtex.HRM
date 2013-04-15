@@ -1,10 +1,11 @@
-﻿namespace Pingdom.Client.WebApi
-{
-    using System.Web.Http;
+﻿using System.Web.Http;
+using Pingdom.Client;
 
+namespace Vtex.HRM.WebApi.Controllers
+{
     public class AnalysisController : ApiController
     {
-        private readonly Controllers.AnalysisController _resource = Resources.Analysis;
+        private readonly Pingdom.Client.Controllers.AnalysisController _resource = Resources.Analysis;
 
         // GET api/analysis/9
         public dynamic Get(int checkId)

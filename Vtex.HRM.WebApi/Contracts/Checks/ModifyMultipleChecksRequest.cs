@@ -1,7 +1,7 @@
-﻿namespace Pingdom.Client.Contracts.Checks
-{
-    using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
+namespace Vtex.HRM.WebApi.Contracts.Checks
+{
     public class ModifyMultipleChecksRequest
     {
         public bool Paused { get; set; }
