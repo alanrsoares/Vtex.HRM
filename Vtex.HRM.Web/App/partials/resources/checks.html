@@ -9,28 +9,23 @@
     <div id="checkTabs" ng-show="checks">
         <ul class="nav nav-tabs" id="checkTabsList">
             <li class="active">
-                <a showtab href="#filtered" ng-click="filtered=checks; tabName='ALL'">
-                    All <span class="badge">{{checks.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=checks; tabName='ALL'">All <span class="badge">{{checks.length}}</span>
                 </a>
             </li>
             <li>
-                <a showtab href="#filtered" ng-click="filtered=up; tabName='UP'">
-                    Up <span class="badge badge-success">{{up.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=up; tabName='UP'">Up <span class="badge badge-success">{{up.length}}</span>
                 </a>
             </li>
             <li>
-                <a showtab href="#filtered" ng-click="filtered=down; tabName='DOWN'">
-                    Down <span class="badge badge-important">{{down.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=down; tabName='DOWN'">Down <span class="badge badge-important">{{down.length}}</span>
                 </a>
             </li>
             <li>
-                <a showtab href="#filtered" ng-click="filtered=stable; tabName='STABLE'">
-                    Stable <span class="badge badge-info">{{stable.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=stable; tabName='STABLE'">Stable <span class="badge badge-info">{{stable.length}}</span>
                 </a>
             </li>
             <li>
-                <a showtab href="#filtered" ng-click="filtered=beta; tabName='BETA'">
-                    Beta <span class="badge badge-warning">{{beta.length}}</span>
+                <a showtab href="#filtered" ng-click="filtered=beta; tabName='BETA'">Beta <span class="badge badge-warning">{{beta.length}}</span>
                 </a>
             </li>
         </ul>
@@ -48,7 +43,6 @@
                             <input class="input-small search-query" ng-model="query" type="text" placeholder="filtro" />
                         </form>
                     </div>
-
                     <table class="table table-striped table-hover">
                         <thead>
                             <th>ID</th>
@@ -58,6 +52,11 @@
                             <th>Actions</th>
                         </thead>
                         <tbody>
+                            <tr class="warning" ng-show="(filtered | filter:query).length==0">
+                                <td colspan="5" style="text-align: center">
+                                    nenhum resultado encontrado
+                                </td>
+                            </tr>
                             <tr ng-repeat="check in filtered | filter:query" ng-class="{error: check.status=='down'}">
                                 <td>{{check.id}}</td>
                                 <td>{{check.name}}</td>
