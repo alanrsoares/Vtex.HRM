@@ -30,7 +30,7 @@ var ResourcesCtrl = function ($rootScope) {
 //#region Resource Controllers
 
 //#region Checks
-var ChecksCtrl = function ($scope, $rootScope, checks) {
+var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
 
     var activeTab = null;
 
@@ -46,6 +46,8 @@ var ChecksCtrl = function ($scope, $rootScope, checks) {
                 alertStyle: tab.alertStyle,
             };
             activeTab = tab;
+            $location.search('tab', tab.label.toLowerCase());
+            $rootScope.pageTitle = "Checks - " + tab.label;
         }
     };
 
@@ -66,48 +68,56 @@ var ChecksCtrl = function ($scope, $rootScope, checks) {
             });
 
             //#region Tabs
-            $scope.tabs = [
-                {
+            $scope.tabs = {
+                all: {
                     label: "All",
                     badgeStyle: "",
                     alertStyle: "alert-info",
                     checks: $scope.checks,
-                    active: ($scope.down.length === 0)
+                    active: false
                 },
-                {
+                up: {
                     label: "Up",
                     badgeStyle: "badge-success",
                     alertStyle: "alert-success",
                     checks: $scope.up,
                     active: false
                 },
-                {
+                down: {
                     label: "Down",
                     badgeStyle: "badge-important",
                     alertStyle: "alert-error",
                     checks: $scope.down,
-                    active: ($scope.down.length > 0)
+                    active: false
                 },
-                {
+                stable: {
                     label: "Stable",
                     badgeStyle: "badge-info",
                     alertStyle: "alert-info",
                     checks: $scope.stable,
                     active: false
                 },
-                {
+                beta: {
                     label: "Beta",
                     badgeStyle: "badge-warning",
                     alertStyle: "",
                     checks: $scope.beta,
                     active: false
                 }
-            ];
-            
+            };
             //#endregion
 
             // sets paneOptions initial state
-            activeTab = _.where($scope.tabs, { active: true })[0];
+            var tabFilter = $location.search()['tab'];
+
+            if (tabFilter && $scope.tabs[tabFilter.toLowerCase()]) {
+                activeTab = $scope.tabs[tabFilter];
+            } else {
+                activeTab = ($scope.down.length > 0)
+                    ? $scope.tabs.down
+                    : $scope.tabs.all;
+            }
+            activeTab.active = true;
             $scope.paneOptions(activeTab);
 
         });
