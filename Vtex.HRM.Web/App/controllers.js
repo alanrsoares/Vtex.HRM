@@ -61,6 +61,10 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
 
     var fetchAllChecks = function (isAutoRefresh) {
 
+        // reset active tab
+        activeTab = _.findWhere($scope.tabs, { active: true });
+        if (activeTab) activeTab.active = false;
+
         // get all checks
         checks.get(function (data) {
 
@@ -83,10 +87,6 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
             });
 
             // sets paneOptions initial state
-
-            activeTab = _.findWhere($scope.tabs, { active: true });
-
-            activeTab.active = false;
 
             activeTab = getActiveTab();
 
