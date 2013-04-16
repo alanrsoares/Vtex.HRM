@@ -32,6 +32,51 @@ var ResourcesCtrl = function ($rootScope) {
 //#region Checks
 var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
 
+    //#region Tabs
+    $scope.tabs = [
+        {
+            label: "All",
+            badgeStyle: "",
+            alertStyle: "alert-info",
+            checks: [],
+            active: false,
+            position: 1
+        },
+        {
+            label: "Up",
+            badgeStyle: "badge-success",
+            alertStyle: "alert-success",
+            checks: [],
+            active: false,
+            position: 2
+        },
+        {
+            label: "Down",
+            badgeStyle: "badge-important",
+            alertStyle: "alert-error",
+            checks: [],
+            active: false,
+            position: 3
+        },
+        {
+            label: "Stable",
+            badgeStyle: "badge-info",
+            alertStyle: "alert-info",
+            checks: [],
+            active: false,
+            position: 4
+        },
+        {
+            label: "Beta",
+            badgeStyle: "badge-warning",
+            alertStyle: "",
+            checks: [],
+            active: false,
+            position: 5
+        }
+    ];
+    //#endregion
+
     var activeTab = null;
 
     var paneOptions = {};
@@ -52,49 +97,8 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
     };
 
     $scope.fetchAllChecks = function () {
-        
+
         // get all checks
-        
-        //#region Tabs
-        $scope.tabs = {
-            all: {
-                label: "All",
-                badgeStyle: "",
-                alertStyle: "alert-info",
-                checks: [],
-                active: false
-            },
-            up: {
-                label: "Up",
-                badgeStyle: "badge-success",
-                alertStyle: "alert-success",
-                checks: [],
-                active: false
-            },
-            down: {
-                label: "Down",
-                badgeStyle: "badge-important",
-                alertStyle: "alert-error",
-                checks: [],
-                active: false
-            },
-            stable: {
-                label: "Stable",
-                badgeStyle: "badge-info",
-                alertStyle: "alert-info",
-                checks: [],
-                active: false
-            },
-            beta: {
-                label: "Beta",
-                badgeStyle: "badge-warning",
-                alertStyle: "",
-                checks: [],
-                active: false
-            }
-        };
-        
-        //#endregion
         checks.get(function (data) {
 
             $scope.all = data.checks;
@@ -104,27 +108,40 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
                 var pattern = /- Beta/;
                 return pattern.test(check.name);
             });
+
             $scope.stable = _.filter($scope.all, function (check) {
                 var pattern = /- Stable/;
                 return pattern.test(check.name);
             });
 
             // set tabs collections
-            angular.forEach($scope.tabs, function(tab) {
+            angular.forEach($scope.tabs, function (tab) {
                 tab.checks = $scope[tab.label.toLowerCase()];
             });
 
             // sets paneOptions initial state
             var tabFilter = $location.search()['tab'];
 
-            if (tabFilter && $scope.tabs[tabFilter.toLowerCase()]) {
-                activeTab = $scope.tabs[tabFilter];
+            if (tabFilter) {
+
+                var selectedTab = _.find($scope.tabs, function (tab) {
+                    return tab.label.toLowerCase() === tabFilter.toLowerCase();
+                });
+
+                activeTab = (selectedTab)
+                    ? selectedTab
+                    : $scope.tabs[0];
+
             } else {
-                activeTab = ($scope.down.length > 0)
-                    ? $scope.tabs.down
-                    : $scope.tabs.all;
+
+                var down = _.findWhere($scope.tabs, { label: 'Down' });
+                var all = _.findWhere($scope.tabs, { label: 'All' });
+
+                activeTab = ($scope.down.length > 0) ? down : all;
             }
+
             activeTab.active = true;
+
             $scope.paneOptions(activeTab);
 
         });
@@ -141,6 +158,7 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
             $scope.fetchAllChecks();
 
         }, 60 * 1000);
+
     };
 
     init();

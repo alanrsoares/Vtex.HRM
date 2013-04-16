@@ -7,10 +7,10 @@
     <span ng-show="!all">Loading checks...</span>
 
     <div id="checkTabs" ng-show="all">
-        
+
         <ul class="nav nav-tabs" id="checkTabsList">
 
-            <li ng-repeat="tab in tabs" ng-class="{active: tab.active}">
+            <li ng-repeat="tab in tabs | orderBy:'position'" ng-class="{active: tab.active}">
                 <a showtab href="#filtered" ng-click="paneOptions(tab);">{{tab.label}} <span class="badge {{tab.badgeStyle}}">{{(tab.checks | filter:query).length}}</span>
                 </a>
             </li>
@@ -33,8 +33,8 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <th ng-click="order='id'">ID <i ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[order=='id']"></i></th>
-                            <th ng-click="order='name'">Nome <i ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[order=='name']"></i> </th>
-                            <th ng-click="order='hostname'">Host <i ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[order=='hostname']"></i> </th>
+                            <th ng-click="order='name'">Nome <i ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[order=='name']"></i></th>
+                            <th ng-click="order='hostname'">Host <i ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[order=='hostname']"></i></th>
                             <th>Status</th>
                             <th>Actions</th>
                         </thead>
