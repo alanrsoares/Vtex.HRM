@@ -31,39 +31,72 @@ var ResourcesCtrl = function ($rootScope) {
 
 //#region Checks
 var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
-    
+
     //#region private
     var activeTab = null;
 
     var paneOptions = {};
 
     var intervalInSeconds = 60;
-    
+
     var getActiveTab = function () {
 
         var tabFilter = $location.search()['tab'];
 
-        if (typeof tabFilter === "string" && tabFilter !== "") {
+        if (!$scope.isAutoRefresh && typeof tabFilter === "string" && tabFilter !== "") {
 
-            var selectedTab = _.find($scope.tabs, function (tab) {
-                return tab.label.toLowerCase() === tabFilter.toLowerCase();
-            });
+            var selectedTab = _.findWhere($scope.tabs, {label: tabFilter.toLowerCase().capitalize()});
 
-            return (selectedTab) ? selectedTab : $scope.tabs[0];
-
+            return (selectedTab && selectedTab.checks.length > 0)
+                ? selectedTab
+                : $scope.tabs[0];
         }
 
         var down = _.findWhere($scope.tabs, { label: 'Down' });
-        var all = _.findWhere($scope.tabs, { label: 'All' });
+        var up = _.findWhere($scope.tabs, { label: 'Up' });
 
-        return ($scope.down.length > 0) ? down : all;
+        return ($scope.down.length > 0) ? down : up;
 
+    };
+
+    var fetchAllChecks = function (isAutoRefresh) {
+
+        // get all checks
+        checks.get(function (data) {
+
+            $scope.all = data.checks;
+            $scope.up = _.where($scope.all, { status: 'up' });
+            $scope.down = _.where($scope.all, { status: 'down' });
+            $scope.beta = _.filter($scope.all, function (check) {
+                var pattern = /- Beta/;
+                return pattern.test(check.name);
+            });
+
+            $scope.stable = _.filter($scope.all, function (check) {
+                var pattern = /- Stable/;
+                return pattern.test(check.name);
+            });
+
+            // set tabs collections
+            angular.forEach($scope.tabs, function (tab) {
+                tab.checks = $scope[tab.label.toLowerCase()];
+            });
+
+            // sets paneOptions initial state
+
+            activeTab = getActiveTab();
+
+            activeTab.active = true;
+
+            $scope.paneOptions(activeTab, isAutoRefresh);
+
+        });
     };
 
     var init = function () {
 
         $scope.order = "id";
-        
+
         //#region Tabs
         $scope.tabs = [
             {
@@ -109,11 +142,11 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
         ];
         //#endregion
 
-        $scope.fetchAllChecks();
+        fetchAllChecks(true);
 
         window.setInterval(function () {
 
-            $scope.fetchAllChecks();
+            fetchAllChecks(true);
 
         }, intervalInSeconds * 1000);
 
@@ -121,7 +154,10 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
     //#endregion
 
     //#region public
-    $scope.paneOptions = function (tab) {
+    $scope.isAutoRefresh = false;
+
+    $scope.paneOptions = function (tab, isAutoRefresh) {
+
         if (arguments.length === 0) {
             return paneOptions;
         } else {
@@ -130,45 +166,17 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
                 tabName: tab.label,
                 alertStyle: tab.alertStyle,
             };
+
             activeTab = tab;
-            $location.search('tab', tab.label.toLowerCase());
+
+            if (!isAutoRefresh) {
+                $location.search('tab', tab.label.toLowerCase());
+            }
+
             $rootScope.pageTitle = "Checks - " + tab.label;
         }
     };
 
-    $scope.fetchAllChecks = function () {
-
-        // get all checks
-        checks.get(function (data) {
-
-            $scope.all = data.checks;
-            $scope.up = _.where($scope.all, { status: 'up' });
-            $scope.down = _.where($scope.all, { status: 'down' });
-            $scope.beta = _.filter($scope.all, function (check) {
-                var pattern = /- Beta/;
-                return pattern.test(check.name);
-            });
-
-            $scope.stable = _.filter($scope.all, function (check) {
-                var pattern = /- Stable/;
-                return pattern.test(check.name);
-            });
-
-            // set tabs collections
-            angular.forEach($scope.tabs, function (tab) {
-                tab.checks = $scope[tab.label.toLowerCase()];
-            });
-
-            // sets paneOptions initial state
-
-            activeTab = getActiveTab();
-
-            activeTab.active = true;
-
-            $scope.paneOptions(activeTab);
-
-        });
-    };
     //#endregion
 
     init();
@@ -183,7 +191,9 @@ var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks) {
         $rootScope.pageTitle = data.check.name;
         $scope.check = data.check;
     });
+
 };
+
 //#endregion
 
 //#endregion

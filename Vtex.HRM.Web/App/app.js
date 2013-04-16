@@ -21,3 +21,7 @@ config(function ($routeProvider) {
             templateUrl: 'app/partials/resources/urlRouter.html',
         });
 });
+
+String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
