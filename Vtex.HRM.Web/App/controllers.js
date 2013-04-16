@@ -52,60 +52,67 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
     };
 
     $scope.fetchAllChecks = function () {
+        
         // get all checks
+        
+        //#region Tabs
+        $scope.tabs = {
+            all: {
+                label: "All",
+                badgeStyle: "",
+                alertStyle: "alert-info",
+                checks: [],
+                active: false
+            },
+            up: {
+                label: "Up",
+                badgeStyle: "badge-success",
+                alertStyle: "alert-success",
+                checks: [],
+                active: false
+            },
+            down: {
+                label: "Down",
+                badgeStyle: "badge-important",
+                alertStyle: "alert-error",
+                checks: [],
+                active: false
+            },
+            stable: {
+                label: "Stable",
+                badgeStyle: "badge-info",
+                alertStyle: "alert-info",
+                checks: [],
+                active: false
+            },
+            beta: {
+                label: "Beta",
+                badgeStyle: "badge-warning",
+                alertStyle: "",
+                checks: [],
+                active: false
+            }
+        };
+        
+        //#endregion
         checks.get(function (data) {
 
-            $scope.checks = data.checks;
-            $scope.up = _.where($scope.checks, { status: 'up' });
-            $scope.down = _.where($scope.checks, { status: 'down' });
-            $scope.beta = _.filter($scope.checks, function (check) {
+            $scope.all = data.checks;
+            $scope.up = _.where($scope.all, { status: 'up' });
+            $scope.down = _.where($scope.all, { status: 'down' });
+            $scope.beta = _.filter($scope.all, function (check) {
                 var pattern = /- Beta/;
                 return pattern.test(check.name);
             });
-            $scope.stable = _.filter($scope.checks, function (check) {
+            $scope.stable = _.filter($scope.all, function (check) {
                 var pattern = /- Stable/;
                 return pattern.test(check.name);
             });
 
-            //#region Tabs
-            $scope.tabs = {
-                all: {
-                    label: "All",
-                    badgeStyle: "",
-                    alertStyle: "alert-info",
-                    checks: $scope.checks,
-                    active: false
-                },
-                up: {
-                    label: "Up",
-                    badgeStyle: "badge-success",
-                    alertStyle: "alert-success",
-                    checks: $scope.up,
-                    active: false
-                },
-                down: {
-                    label: "Down",
-                    badgeStyle: "badge-important",
-                    alertStyle: "alert-error",
-                    checks: $scope.down,
-                    active: false
-                },
-                stable: {
-                    label: "Stable",
-                    badgeStyle: "badge-info",
-                    alertStyle: "alert-info",
-                    checks: $scope.stable,
-                    active: false
-                },
-                beta: {
-                    label: "Beta",
-                    badgeStyle: "badge-warning",
-                    alertStyle: "",
-                    checks: $scope.beta,
-                    active: false
-                }
-            };
-            //#endregion
+            // set tabs collections
+            angular.forEach($scope.tabs, function(tab) {
+                tab.checks = $scope[tab.label.toLowerCase()];
+            });
 
             // sets paneOptions initial state
             var tabFilter = $location.search()['tab'];
@@ -124,6 +131,8 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
     };
 
     var init = function () {
+
+        $scope.order = "id";
 
         $scope.fetchAllChecks();
 

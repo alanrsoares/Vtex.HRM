@@ -4,9 +4,10 @@
         <h1>Checks <small><a href="/api/checks" target="_blank">/api/checks</a></small></h1>
     </div>
 
-    <span ng-show="!checks">Loading checks...</span>
+    <span ng-show="!all">Loading checks...</span>
 
-    <div id="checkTabs" ng-show="checks">
+    <div id="checkTabs" ng-show="all">
+        
         <ul class="nav nav-tabs" id="checkTabsList">
 
             <li ng-repeat="tab in tabs" ng-class="{active: tab.active}">
@@ -21,7 +22,7 @@
             <div class="tab-pane active" id="filtered">
                 <p>
                     <div class="alert {{paneOptions().alertStyle}}">
-                        <strong>{{paneOptions().tabName}}</strong> Services
+                        <strong>{{paneOptions().tabName}}</strong> Services.
                     </div>
 
                     <div>
@@ -31,9 +32,9 @@
                     </div>
                     <table class="table table-striped table-hover">
                         <thead>
-                            <th>ID <i class="icon-s"></i></th>
-                            <th ng-click="order=name">Nome</th>
-                            <th ng-click="order=host">Host</th>
+                            <th>ID <i ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[order=='id']" ng-click="order='id'"></i></th>
+                            <th>Nome <i ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[order=='name']" ng-click="order='name'"></i> </th>
+                            <th>Host <i ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[order=='hostname']" ng-click="order='hostname'"></i> </th>
                             <th>Status</th>
                             <th>Actions</th>
                         </thead>
