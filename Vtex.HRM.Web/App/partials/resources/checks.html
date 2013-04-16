@@ -27,7 +27,11 @@
 
                     <div>
                         <form class="form-search">
-                            <input class="input-small search-query" ng-model="query" type="text" placeholder="filtro" />
+                            <div class="input-prepend">
+                                <button onclick="return false;" class="btn"><i class="icon-filter"></i></button>
+                                <input class="input-medium search-query" ng-model="query" type="text" placeholder="filtro" />
+                            </div>
+
                         </form>
                     </div>
                     <table class="table table-striped table-hover">

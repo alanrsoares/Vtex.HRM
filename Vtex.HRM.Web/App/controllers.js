@@ -31,71 +31,13 @@ var ResourcesCtrl = function ($rootScope) {
 
 //#region Checks
 var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
-
-    //#region Tabs
-    $scope.tabs = [
-        {
-            label: "All",
-            badgeStyle: "",
-            alertStyle: "alert-info",
-            checks: [],
-            active: false,
-            position: 1
-        },
-        {
-            label: "Up",
-            badgeStyle: "badge-success",
-            alertStyle: "alert-success",
-            checks: [],
-            active: false,
-            position: 2
-        },
-        {
-            label: "Down",
-            badgeStyle: "badge-important",
-            alertStyle: "alert-error",
-            checks: [],
-            active: false,
-            position: 3
-        },
-        {
-            label: "Stable",
-            badgeStyle: "badge-info",
-            alertStyle: "alert-info",
-            checks: [],
-            active: false,
-            position: 4
-        },
-        {
-            label: "Beta",
-            badgeStyle: "badge-warning",
-            alertStyle: "",
-            checks: [],
-            active: false,
-            position: 5
-        }
-    ];
-    //#endregion
-
+    //#region private
     var activeTab = null;
 
     var paneOptions = {};
 
-    $scope.paneOptions = function (tab) {
-        if (arguments.length === 0) {
-            return paneOptions;
-        } else {
-            paneOptions = {
-                filtered: tab.checks,
-                tabName: tab.label,
-                alertStyle: tab.alertStyle,
-            };
-            activeTab = tab;
-            $location.search('tab', tab.label.toLowerCase());
-            $rootScope.pageTitle = "Checks - " + tab.label;
-        }
-    };
-
+    var intervalInSeconds = 60;
+    
     var getActiveTab = function () {
 
         var tabFilter = $location.search()['tab'];
@@ -115,6 +57,82 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
 
         return ($scope.down.length > 0) ? down : all;
 
+    };
+
+    var init = function () {
+
+        $scope.order = "id";
+        
+        //#region Tabs
+        $scope.tabs = [
+            {
+                label: "All",
+                badgeStyle: "",
+                alertStyle: "alert-info",
+                checks: [],
+                active: false,
+                position: 1
+            },
+            {
+                label: "Up",
+                badgeStyle: "badge-success",
+                alertStyle: "alert-success",
+                checks: [],
+                active: false,
+                position: 2
+            },
+            {
+                label: "Down",
+                badgeStyle: "badge-important",
+                alertStyle: "alert-error",
+                checks: [],
+                active: false,
+                position: 3
+            },
+            {
+                label: "Stable",
+                badgeStyle: "badge-info",
+                alertStyle: "alert-info",
+                checks: [],
+                active: false,
+                position: 4
+            },
+            {
+                label: "Beta",
+                badgeStyle: "badge-warning",
+                alertStyle: "",
+                checks: [],
+                active: false,
+                position: 5
+            }
+        ];
+        //#endregion
+
+        $scope.fetchAllChecks();
+
+        window.setInterval(function () {
+
+            $scope.fetchAllChecks();
+
+        }, intervalInSeconds * 1000);
+
+    };
+    //#endregion
+
+    //#region public
+    $scope.paneOptions = function (tab) {
+        if (arguments.length === 0) {
+            return paneOptions;
+        } else {
+            paneOptions = {
+                filtered: tab.checks,
+                tabName: tab.label,
+                alertStyle: tab.alertStyle,
+            };
+            activeTab = tab;
+            $location.search('tab', tab.label.toLowerCase());
+            $rootScope.pageTitle = "Checks - " + tab.label;
+        }
     };
 
     $scope.fetchAllChecks = function () {
@@ -150,20 +168,7 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
 
         });
     };
-
-    var init = function () {
-
-        $scope.order = "id";
-
-        $scope.fetchAllChecks();
-
-        window.setInterval(function () {
-
-            $scope.fetchAllChecks();
-
-        }, 60 * 1000);
-
-    };
+    //#endregion
 
     init();
 };
