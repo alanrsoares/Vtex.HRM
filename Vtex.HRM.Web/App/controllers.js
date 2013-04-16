@@ -45,7 +45,7 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
 
         if (!$scope.isAutoRefresh && typeof tabFilter === "string" && tabFilter !== "") {
 
-            var selectedTab = _.findWhere($scope.tabs, {label: tabFilter.toLowerCase().capitalize()});
+            var selectedTab = _.findWhere($scope.tabs, { label: tabFilter.toLowerCase().capitalize() });
 
             return (selectedTab && selectedTab.checks.length > 0)
                 ? selectedTab
@@ -83,6 +83,10 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
             });
 
             // sets paneOptions initial state
+
+            activeTab = _.findWhere($scope.tabs, { active: true });
+
+            activeTab.active = false;
 
             activeTab = getActiveTab();
 
