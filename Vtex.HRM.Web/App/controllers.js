@@ -96,6 +96,27 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
         }
     };
 
+    var getActiveTab = function () {
+
+        var tabFilter = $location.search()['tab'];
+
+        if (typeof tabFilter === "string" && tabFilter !== "") {
+
+            var selectedTab = _.find($scope.tabs, function (tab) {
+                return tab.label.toLowerCase() === tabFilter.toLowerCase();
+            });
+
+            return (selectedTab) ? selectedTab : $scope.tabs[0];
+
+        }
+
+        var down = _.findWhere($scope.tabs, { label: 'Down' });
+        var all = _.findWhere($scope.tabs, { label: 'All' });
+
+        return ($scope.down.length > 0) ? down : all;
+
+    };
+
     $scope.fetchAllChecks = function () {
 
         // get all checks
@@ -120,25 +141,8 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
             });
 
             // sets paneOptions initial state
-            var tabFilter = $location.search()['tab'];
 
-            if (tabFilter) {
-
-                var selectedTab = _.find($scope.tabs, function (tab) {
-                    return tab.label.toLowerCase() === tabFilter.toLowerCase();
-                });
-
-                activeTab = (selectedTab)
-                    ? selectedTab
-                    : $scope.tabs[0];
-
-            } else {
-
-                var down = _.findWhere($scope.tabs, { label: 'Down' });
-                var all = _.findWhere($scope.tabs, { label: 'All' });
-
-                activeTab = ($scope.down.length > 0) ? down : all;
-            }
+            activeTab = getActiveTab();
 
             activeTab.active = true;
 
