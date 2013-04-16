@@ -31,6 +31,7 @@ var ResourcesCtrl = function ($rootScope) {
 
 //#region Checks
 var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
+    
     //#region private
     var activeTab = null;
 
