@@ -99,8 +99,6 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
 
     var init = function () {
 
-        $scope.order = "id";
-
         //#region Tabs
         $scope.tabs = [
             {
