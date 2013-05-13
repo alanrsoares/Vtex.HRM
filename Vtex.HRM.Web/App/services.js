@@ -2,20 +2,12 @@
 
 angular.module('hrm.services', ['ngResource'])
     .factory('checks', function ($resource) {
-        return $resource('/api/checks/:checkId', {}, {
-            query: {
-                method: 'GET',
-                params: { checkId: '' },
-                isArray: true
-            }
-        });
+        return $resource('/api/checks/:checkId', { checkId: "@checkId" }, {});
     })
-    .factory('CurrencyConverter', function ($resource) {
-        return $resource('/api/CurrencyConverter/:amount/:from/:to', {}, {
-            query: {
-                method: 'GET',
-                params: {},
-                isArray: true
+    .factory("analysis", function ($resource) {
+        return $resource("/api/analysis/:checkId/", { checkId: "@checkId" },
+            {
+                update: { method: "PUT" }
             }
-        });
+        );
     });

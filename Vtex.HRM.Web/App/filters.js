@@ -11,4 +11,10 @@ angular.module('hrm.filters', [])
         return function (input) {
             return moment.unix(input).format('DD/MM/YYYY HH:mm:ss');
         };
+    })
+    .filter('capitalizeFirst', function () {
+        return function (input) {
+            var loweCaseString = input.toLowerCase();
+            return loweCaseString.substring(0, 1).toUpperCase() + loweCaseString.substring(1);
+        };
     });

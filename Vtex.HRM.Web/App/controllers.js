@@ -201,18 +201,53 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
     init();
 };
 
-var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks) {
+var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks, analysis) {
 
     // get detailed check :id
     $scope.checkId = $routeParams.id;
 
+    $scope.analysisResult = [];
+
     checks.get({ checkId: $routeParams.id }, function (data) {
+
         $rootScope.pageTitle = data.check.name;
+
         $scope.check = data.check;
+
+        // if check is down, then get analysis
+        if ($scope.check) {
+            analysis.get({ checkId: $scope.check.id }, function (analysisResult) {
+                $scope.analysisResult = analysisResult.analysis;
+
+                analysis.get({ checkId: $scope.check.id, analysisId: $scope.analysisResult[0].id }, function (analysisDetail) {
+                    $scope.analysisDetail = analysisDetail;
+                    var analysisTaskResult = $scope.analysisDetail.analysisresult.tasks[0].result;
+                    $scope.taskRawResponse = _.findWhere(analysisTaskResult, { name: "raw_response" }).value;
+                    $scope.communicationLog = _.findWhere(analysisTaskResult, { name: "communication_log" }).value[0];
+                    $scope.responseHeaders = $scope.communicationLog.response_headers;
+                });
+            });
+        }
     });
 
 };
 
-//#endregion
+//#endregion Checks
+
+//#region Analysis
+
+var AnalysisCtrl = function ($scope, $rootScope, $routeParams, analysis) {
+
+};
+
+var AnalysisDetailCtrl = function ($scope, $rootScope, $routeParams, analysis) {
+    $scope.checkId = $routeParams.id;
+    $scope.analysisId = $location.search()['analysisId'];
+
+
+
+};
+
+//#endregion Analysis
 
 //#endregion

@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using Pingdom.Client;
+using WebAPI.OutputCache;
 
 namespace Vtex.HRM.WebApi.Controllers
 {
@@ -8,14 +9,18 @@ namespace Vtex.HRM.WebApi.Controllers
         private readonly Pingdom.Client.Controllers.AnalysisController _resource = Resources.Analysis;
 
         // GET api/analysis/9
-        public dynamic Get(int checkId)
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        public dynamic Get(int id)
         {
+            var checkId = id;
             return _resource.GetRootCauseAnalysisResultsList(checkId).ToDynamicObject();
         }
 
         // GET api/analysis/5/6
-        public dynamic Get(int checkId, int analysisId)
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        public dynamic Get(int id, int analysisId)
         {
+            var checkId = id;
             return _resource.GetRawAnalysisResults(checkId, analysisId).ToDynamicObject();
         }
 

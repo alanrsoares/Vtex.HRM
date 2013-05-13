@@ -51,7 +51,7 @@
                                 </span>
                             </th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th>A&ccedil;&otilde;es</th>
                         </thead>
                         <tbody>
                             <tr class="warning" ng-show="(paneOptions().filtered | filter:query).length==0">
@@ -62,7 +62,8 @@
                                 <td>{{check.id}}</td>
                                 <td>{{check.name}}</td>
                                 <td>{{check.hostname}}</td>
-                                <td><i ng-class="{up:'icon-ok', down:'icon-remove'}[check.status]"></i></td>
+                                <td>
+                                    <img src="Content/images/status-{{check.status}}.png" /></td>
                                 <td>
                                     <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
                                 </td>
@@ -74,5 +75,5 @@
 
         </div>
     </div>
-    
+
 </section>

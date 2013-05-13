@@ -7,13 +7,55 @@
     </div>
 
     <span ng-show="!check">Loading check...</span>
-    
+
     <ul ng-show="check">
         <li>Nome: {{check.name}}
         </li>
-        <li>CheckUrl: <a href="{{check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a></li>
+        <li>CheckUrl: <a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a></li>
         <li>Status: {{check.status}}</li>
-        <li>Created: {{check.created | unixDate}}</li>
+        <li>Criado em: {{check.created | unixDate}}</li>
+        <li>Ultimo erro: {{check.lasterrortime | unixDate}}</li>
     </ul>
+    <hr />
+    <div id="analysis" ng-show="analysisDetail">
+
+        <div class="page-header">
+            <h3>Ultima An&aacute;lise</h3>
+        </div>
+
+        <div id="lastAnalysis" class="well">
+            <ul>
+                <li><strong>Status</strong>: {{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}.
+                </li>
+                <li><strong>Status de Confirma&ccedil;&atilde;o</strong>: {{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}.
+                </li>
+                <li><strong>Tipo</strong>: {{analysisDetail.analysisresult.analysis_type}}.
+                </li>
+                <li><strong>Disparado em</strong>: {{analysisDetail.analysisresult.time_triggered | unixDate}}.
+                </li>
+                <li><strong>Raw Response</strong>: 
+                    <pre style="background: #ffffff">{{taskRawResponse}}</pre>
+                </li>
+                <li>
+                    <strong>Request</strong>:
+                    <pre style="background: #ffffff">{{communicationLog.request}}</pre>
+
+                </li>
+                <li>
+                    <strong>Response Content</strong>:
+                    <pre style="background: #ffffff">{{communicationLog.response_content}}</pre>
+                </li>
+                <li>
+                    <strong>Response Headers</strong>:
+                    <ul>
+                        <li ng-repeat="header in responseHeaders">
+                            <strong>{{header.name}}</strong>: {{header.value}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
 
 </section>
