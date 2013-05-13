@@ -81,6 +81,10 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
                 return pattern.test(check.name);
             });
 
+            var applications = _.union($scope.beta, $scope.stable);
+
+            $scope.stores = _.difference($scope.all, applications);
+
             // set tabs collections
             angular.forEach($scope.tabs, function (tab) {
                 tab.checks = $scope[tab.label.toLowerCase()];
@@ -140,6 +144,14 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
                 checks: [],
                 active: false,
                 position: 5
+            },
+            {
+                label: "Stores",
+                badgeStyle: "badge-info",
+                alertStyle: "",
+                checks: [],
+                active: false,
+                position: 6
             }
         ];
         //#endregion
@@ -177,6 +189,11 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
 
             $rootScope.pageTitle = "Checks - " + tab.label;
         }
+    };
+
+    $scope.detail = function (checkId) {
+        console.log("#/resources/checks/" + checkId);
+        window.location = "#/resources/checks/" + checkId;
     };
 
     //#endregion

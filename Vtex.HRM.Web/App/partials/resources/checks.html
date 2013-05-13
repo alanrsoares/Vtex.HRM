@@ -28,8 +28,7 @@
                     <div>
                         <input class="input-large" ng-model="query" type="text" placeholder="filtrar resultado" />
                         <p>
-                            <span class="muted" ng-show="query.length>0">
-                                itens encontrados <span class="badge" ng-class="{'badge-important':(paneOptions().filtered | filter:query).length==0}">{{(paneOptions().filtered | filter:query).length}}</span>
+                            <span class="muted" ng-show="query.length>0">itens encontrados <span class="badge" ng-class="{'badge-important':(paneOptions().filtered | filter:query).length==0}">{{(paneOptions().filtered | filter:query).length}}</span>
                             </span>
                         </p>
                     </div>
@@ -59,7 +58,7 @@
                                 <td colspan="5" class="muted" style="text-align: center">nenhum resultado encontrado
                                 </td>
                             </tr>
-                            <tr ng-repeat="check in paneOptions().filtered | filter:query | orderBy:predicate:reverse" ng-class="{error: check.status=='down'}">
+                            <tr ng-click="detail({{check.id}})" ng-repeat="check in paneOptions().filtered | filter:query | orderBy:predicate:reverse" ng-class="{error: check.status=='down'}">
                                 <td>{{check.id}}</td>
                                 <td>{{check.name}}</td>
                                 <td>{{check.hostname}}</td>
@@ -75,5 +74,5 @@
 
         </div>
     </div>
-
+    
 </section>

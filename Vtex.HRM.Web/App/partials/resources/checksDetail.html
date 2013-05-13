@@ -7,11 +7,11 @@
     </div>
 
     <span ng-show="!check">Loading check...</span>
-
+    
     <ul ng-show="check">
         <li>Nome: {{check.name}}
         </li>
-        <li>CheckUrl: {{check.hostname + check.type.http.url}}</li>
+        <li>CheckUrl: <a href="{{check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a></li>
         <li>Status: {{check.status}}</li>
         <li>Created: {{check.created | unixDate}}</li>
     </ul>

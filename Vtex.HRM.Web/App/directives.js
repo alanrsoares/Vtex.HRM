@@ -9,14 +9,22 @@ angular.module('hrm.directives', [])
         };
     }])
     .directive('showtab',
-    function () {
-        return {
-            link: function (scope, element, attrs) {
-                element.click(function (e) {
-                    e.preventDefault();
-                    $(element).tab('show');
-                });
-            }
-        };
-    });
+        function () {
+            return {
+                link: function (scope, element, attrs) {
+                    element.click(function (e) {
+                        e.preventDefault();
+                        $(element).tab('show');
+                    });
+                }
+            };
+        })
+    .directive('forceDirectedGraph',
+        function () {
+            return {
+                link: function (scope, element) {
+                    element[0].append($('<span />', { text: 'hello' }));
+                }
+            };
+        });
 
