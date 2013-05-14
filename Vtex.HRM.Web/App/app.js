@@ -4,9 +4,12 @@
 var app = angular.module('hrm', ['hrm.services', 'hrm.directives', 'hrm.filters', '$strap.directives']).
 config(function ($routeProvider) {
     $routeProvider
+        //.when('/', {
+        //    controller: 'MainCtrl',
+        //    templateUrl: 'app/partials/home.html',
+        //})
         .when('/', {
-            controller: 'MainCtrl',
-            templateUrl: 'app/partials/home.html',
+            redirectTo: '/resources/checks'
         })
         .when('/resources', {
             controller: 'ResourcesCtrl',

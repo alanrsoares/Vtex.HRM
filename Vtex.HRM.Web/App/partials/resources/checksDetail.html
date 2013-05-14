@@ -6,22 +6,39 @@
             </small></h1>
     </div>
 
-    <span ng-show="!check">Loading check...</span>
+    <span ng-show="!check">Carregando check...</span>
 
     <ul ng-show="check">
         <li>Nome: {{check.name}}
         </li>
-        <li>CheckUrl: <a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a></li>
-        <li>Status: {{check.status}}</li>
-        <li>Criado em: {{check.created | unixDate}}</li>
-        <li>Ultimo erro: {{check.lasterrortime | unixDate}}</li>
+        <li>
+            <strong>Url monitorada</strong>: <a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a>
+        </li>
+        <li>
+            <strong>Status</strong>:
+            <img ng-src="{{statusIcon}}" alt="{{check.status}}" />
+        </li>
+        <li>
+            <strong>Criado em</strong>: {{check.created | unixDate}}
+        </li>
+        <li>
+            <strong>&Uacute;ltimo erro capturado em</strong>: {{check.lasterrortime | unixDate}}
+        </li>
     </ul>
-    <hr />
-    <div id="analysis" ng-show="analysisDetail">
 
-        <div class="page-header">
-            <h3>Ultima An&aacute;lise</h3>
-        </div>
+    <hr />
+
+    <div class="page-header">
+        <h1>An&aacute;lise do &uacute;ltimo erro
+                <small>
+                    <a href="/resources/analysis/{{check.id}}" target="_blank">ver hist&oacute;rico</a>
+                </small>
+        </h1>
+    </div>
+
+    <span ng-show="!analysisDetail">Carregando an&aacute;lise...</span>
+
+    <div id="analysis" ng-show="analysisDetail">
 
         <div id="lastAnalysis" class="well">
             <ul>

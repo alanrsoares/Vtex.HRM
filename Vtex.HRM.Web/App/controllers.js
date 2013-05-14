@@ -214,6 +214,8 @@ var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks, analy
 
         $scope.check = data.check;
 
+        $scope.statusIcon = "Content/images/status-" + $scope.check.status + ".png";
+
         // if check is down, then get analysis
         if ($scope.check) {
             analysis.get({ checkId: $scope.check.id }, function (analysisResult) {
