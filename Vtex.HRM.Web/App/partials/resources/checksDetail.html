@@ -1,78 +1,81 @@
 <section id="checksDetail" ng-controller="ChecksDetailCtrl">
-    <div class="page-header">
-        <h1>{{check.name}}
+
+    <span class="alert alert-info" ng-show="!check">Carregando check...</span>
+
+    <div id="checksDetailContainer" ng-show="check">
+        <div class="page-header">
+            <h1>{{check.name}} - Visualiza&ccedil;&atilde;o detalhada
             <small>
                 <a href="/api/checks/{{check.id}}" target="_blank">/api/checks/{{check.id}}</a>
             </small></h1>
-    </div>
+        </div>
 
-    <span ng-show="!check">Carregando check...</span>
+        <ul>
+            <li>
+                <strong>Nome</strong>: {{check.name}}
+            </li>
+            <li>
+                <strong>Url monitorada</strong>: <a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a>
+            </li>
+            <li>
+                <strong>Status</strong>:
+                <img ng-src="{{statusIcon}}" alt="{{check.status}}" />
+            </li>
+            <li>
+                <strong>Criado em</strong>: {{check.created | unixDate}}
+            </li>
+            <li>
+                <strong>&Uacute;ltimo erro capturado em</strong>: {{check.lasterrortime | unixDate}}
+            </li>
+        </ul>
 
-    <ul ng-show="check">
-        <li>Nome: {{check.name}}
-        </li>
-        <li>
-            <strong>Url monitorada</strong>: <a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a>
-        </li>
-        <li>
-            <strong>Status</strong>:
-            <img ng-src="{{statusIcon}}" alt="{{check.status}}" />
-        </li>
-        <li>
-            <strong>Criado em</strong>: {{check.created | unixDate}}
-        </li>
-        <li>
-            <strong>&Uacute;ltimo erro capturado em</strong>: {{check.lasterrortime | unixDate}}
-        </li>
-    </ul>
+        <span class="alert alert-info" ng-show="!analysisDetail">Carregando an&aacute;lise...</span>
 
-    <hr />
+        <div id="analysisDetailContainer" ng-show="analysisDetail">
 
-    <div class="page-header">
-        <h1>An&aacute;lise do &uacute;ltimo erro
-                <small>
-                    <a href="/resources/analysis/{{check.id}}" target="_blank">ver hist&oacute;rico</a>
-                </small>
-        </h1>
-    </div>
+            <div class="page-header">
+                <h1>An&aacute;lise do &uacute;ltimo erro
+                    <small>
+                        <a href="#/resources/analysis/{{check.id}}" target="_blank">ver hist&oacute;rico</a>
+                    </small>
+                </h1>
+            </div>
 
-    <span ng-show="!analysisDetail">Carregando an&aacute;lise...</span>
+            <div class="well">
+                <ul>
+                    <li><strong>Status</strong>: 
+                        <pre style="background: white">{{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}</pre>
+                    </li>
+                    <li><strong>Status de Confirma&ccedil;&atilde;o</strong>: 
+                        <pre style="background: white">{{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}</pre>
+                    </li>
+                    <li><strong>Tipo</strong>: 
+                        <pre style="background: white">{{analysisDetail.analysisresult.analysis_type}}</pre>
+                    </li>
+                    <li><strong>Disparado em</strong>: 
+                        <pre style="background: white">{{analysisDetail.analysisresult.time_triggered | unixDate}}</pre>
+                    </li>
+                    <li>
+                        <strong>Request</strong>:
+                        <pre style="background: white">{{communicationLog.request}}</pre>
+                    </li>
+                    <li ng-show="communicationLog.response_content.trim().length>0">
+                        <strong>Response Content</strong>:
+                        <pre style="background: white">{{communicationLog.response_content}}</pre>
+                    </li>
+                    <li>
+                        <strong>Response Headers</strong>:
+                        <pre style="background: white"><ul><li ng-repeat="header in responseHeaders"><strong>{{header.name}}</strong>: {{header.value}}</li></ul></pre>
+                    </li>
+                    <li><strong>Raw Response</strong>: 
+                        <pre style="background: white">{{taskRawResponse}}</pre>
+                    </li>
+                </ul>
+            </div>
 
-    <div id="analysis" ng-show="analysisDetail">
-
-        <div id="lastAnalysis" class="well">
-            <ul>
-                <li><strong>Status</strong>: {{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}.
-                </li>
-                <li><strong>Status de Confirma&ccedil;&atilde;o</strong>: {{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}.
-                </li>
-                <li><strong>Tipo</strong>: {{analysisDetail.analysisresult.analysis_type}}.
-                </li>
-                <li><strong>Disparado em</strong>: {{analysisDetail.analysisresult.time_triggered | unixDate}}.
-                </li>
-                <li><strong>Raw Response</strong>: 
-                    <pre style="background: #ffffff">{{taskRawResponse}}</pre>
-                </li>
-                <li>
-                    <strong>Request</strong>:
-                    <pre style="background: #ffffff">{{communicationLog.request}}</pre>
-
-                </li>
-                <li>
-                    <strong>Response Content</strong>:
-                    <pre style="background: #ffffff">{{communicationLog.response_content}}</pre>
-                </li>
-                <li>
-                    <strong>Response Headers</strong>:
-                    <ul>
-                        <li ng-repeat="header in responseHeaders">
-                            <strong>{{header.name}}</strong>: {{header.value}}
-                        </li>
-                    </ul>
-                </li>
-            </ul>
         </div>
 
     </div>
+
 
 </section>
