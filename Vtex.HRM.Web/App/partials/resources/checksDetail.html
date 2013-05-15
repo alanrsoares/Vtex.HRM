@@ -24,12 +24,12 @@
             <li>
                 <strong>Criado em</strong>: {{check.created | unixDate}}
             </li>
-            <li>
+            <li ng-show="check.lasterrortime">
                 <strong>&Uacute;ltimo erro capturado em</strong>: {{check.lasterrortime | unixDate}}
             </li>
         </ul>
 
-        <span class="alert alert-info" ng-show="!analysisDetail">Carregando an&aacute;lise...</span>
+        <span class="alert alert-info" ng-show="!analysisDetail && check.lasterrortime">Carregando an&aacute;lise...</span>
 
         <div id="analysisDetailContainer" ng-show="analysisDetail">
 
@@ -63,7 +63,7 @@
                         <strong>Response Content</strong>:
                         <pre style="background: white">{{communicationLog.response_content}}</pre>
                     </li>
-                    <li>
+                    <li ng-show="responseHeaders.length>0">
                         <strong>Response Headers</strong>:
                         <pre style="background: white"><ul><li ng-repeat="header in responseHeaders"><strong>{{header.name}}</strong>: {{header.value}}</li></ul></pre>
                     </li>

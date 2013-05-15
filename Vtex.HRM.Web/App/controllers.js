@@ -219,15 +219,20 @@ var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks, analy
         // if check is down, then get analysis
         if ($scope.check) {
             analysis.get({ checkId: $scope.check.id }, function (analysisResult) {
-                $scope.analysisResult = analysisResult.analysis;
 
-                analysis.get({ checkId: $scope.check.id, analysisId: $scope.analysisResult[0].id }, function (analysisDetail) {
-                    $scope.analysisDetail = analysisDetail;
-                    var analysisTaskResult = $scope.analysisDetail.analysisresult.tasks[0].result;
-                    $scope.taskRawResponse = _.findWhere(analysisTaskResult, { name: "raw_response" }).value;
-                    $scope.communicationLog = _.findWhere(analysisTaskResult, { name: "communication_log" }).value[0];
-                    $scope.responseHeaders = $scope.communicationLog.response_headers;
-                });
+                if (analysisResult && analysisResult.analysis.length > 0) {
+
+                    $scope.analysisResult = analysisResult.analysis;
+
+                    analysis.get({ checkId: $scope.check.id, analysisId: $scope.analysisResult[0].id }, function (analysisDetail) {
+                        $scope.analysisDetail = analysisDetail;
+                        var analysisTaskResult = $scope.analysisDetail.analysisresult.tasks[0].result;
+                        $scope.taskRawResponse = _.findWhere(analysisTaskResult, { name: "raw_response" }).value;
+                        $scope.communicationLog = _.findWhere(analysisTaskResult, { name: "communication_log" }).value[0];
+                        $scope.responseHeaders = $scope.communicationLog.response_headers;
+                    });
+                }
+
             });
         }
     });
@@ -242,11 +247,27 @@ var AnalysisCtrl = function ($scope, $rootScope, $routeParams, analysis) {
 
 };
 
-var AnalysisDetailCtrl = function ($scope, $rootScope, $routeParams, analysis) {
+var AnalysisDetailCtrl = function ($scope, $rootScope, $routeParams, $location, analysis) {
     $scope.checkId = $routeParams.id;
     $scope.analysisId = $location.search()['analysisId'];
 
+    if (!$scope.checkId) return false;
 
+    if ($scope.analysisId) {
+        //analysis detail
+
+        analysis.get({ checkId: $scope.checkId, analysisId: $scope.analysisId }, function (data) {
+            $scope.analysisDetail = data;
+        });
+    } else {
+        //analysis history
+
+        analysis.get({ checkId: $scope.checkId }, function (data) {
+            $scope.analysisHistory = data.analysis;
+
+            console.log(data.analysis);
+        });
+    }
 
 };
 
