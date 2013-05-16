@@ -35,5 +35,13 @@
                 return new ContactsController();
             }
         }
+
+        public static ProbesController Probes
+        {
+            get
+            {
+                return new ProbesController();
+            }
+        }
     }
 }

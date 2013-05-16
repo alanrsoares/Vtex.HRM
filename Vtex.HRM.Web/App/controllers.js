@@ -201,16 +201,20 @@ var ChecksCtrl = function ($scope, $rootScope, $location, checks) {
     init();
 };
 
-var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks, analysis) {
+var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks, analysis, probes) {
 
     // get detailed check :id
     $scope.checkId = $routeParams.id;
 
     $scope.analysisResult = [];
 
+    probes.get(function (data) {
+        $scope.probes = data.probes;
+    });
+
     checks.get({ checkId: $routeParams.id }, function (data) {
 
-        $rootScope.pageTitle = data.check.name;
+        //$rootScope.pageTitle = data.check.name;
 
         $scope.check = data.check;
 
@@ -237,21 +241,27 @@ var ChecksDetailCtrl = function ($scope, $rootScope, $routeParams, checks, analy
         }
     });
 
+    $scope.taskCommunicationLog = function (task) {
+        var result = _.findWhere(task.result, { name: 'communication_log' }).value[0];
+        return result;
+    };
+
 };
 
 //#endregion Checks
 
 //#region Analysis
 
-var AnalysisCtrl = function ($scope, $rootScope, $routeParams, analysis) {
+var AnalysisDetailCtrl = function ($scope, $rootScope, $routeParams, $location, analysis, probes) {
 
-};
-
-var AnalysisDetailCtrl = function ($scope, $rootScope, $routeParams, $location, analysis) {
     $scope.checkId = $routeParams.id;
     $scope.analysisId = $location.search()['analysisId'];
 
     if (!$scope.checkId) return false;
+
+    probes.get(function (data) {
+        $scope.probes = data.probes;
+    });
 
     if ($scope.analysisId) {
         //analysis detail
@@ -265,10 +275,15 @@ var AnalysisDetailCtrl = function ($scope, $rootScope, $routeParams, $location, 
         analysis.get({ checkId: $scope.checkId }, function (data) {
             $scope.analysisHistory = data.analysis;
 
-            console.log(data.analysis);
         });
     }
 
+    $scope.taskCommunicationLog = function (task) {
+        var result = _.findWhere(task.result, { name: 'communication_log' }).value[0];
+        return result;
+    };
+
+    return false;
 };
 
 //#endregion Analysis
