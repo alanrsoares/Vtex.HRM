@@ -40,7 +40,7 @@
         <div class="page-header">
             <h1>Análise - Detalhe
                 <small>
-                    <a href="#/resources/analysis/{{checkId}}">ver hist&oacute;rico</a>
+                    <a href="#/resources/analysis/{{checkId}}">ver histórico</a>
                 </small>
             </h1>
         </div>
@@ -85,27 +85,26 @@
                                 <p>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a showtab href="#request">Requisição</a>
+                                            <a showtab href="#request-{{task.analyzer_id}}">Requisição</a>
                                         </li>
                                         <li>
-                                            <a showtab href="#headers">Cabeçalhos</a>
+                                            <a showtab href="#headers-{{task.analyzer_id}}">Cabeçalhos</a>
                                         </li>
                                         <li>
-                                            <a showtab href="#content">Conteúdo</a>
+                                            <a showtab href="#content-{{task.analyzer_id}}">Conteúdo</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="request">
+                                        <div class="tab-pane active" id="request-{{task.analyzer_id}}">
                                             <pre>{{taskCommunicationLog(task).request}}</pre>
                                         </div>
-                                        <div class="tab-pane" id="headers">
+                                        <div class="tab-pane" id="headers-{{task.analyzer_id}}">
                                             <pre><ul><li ng-repeat="header in taskCommunicationLog(task).response_headers"><strong>{{header.name}}</strong>: {{header.value}}</li></ul></pre>
                                         </div>
-                                        <div class="tab-pane" id="content">
+                                        <div class="tab-pane" id="content-{{task.analyzer_id}}">
                                             <pre>{{taskCommunicationLog(task).response_content}}</pre>
                                         </div>
                                     </div>
-
                                 </p>
                             </div>
                         </div>
