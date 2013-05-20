@@ -101,7 +101,7 @@
                                             <pre><ul><li ng-repeat="header in taskCommunicationLog(task).response_headers"><strong>{{header.name}}</strong>: {{header.value}}</li></ul></pre>
                                         </div>
                                         <div class="tab-pane" id="content-{{task.analyzer_id}}">
-                                            <pre>{{taskCommunicationLog(task).response_content}}</pre>
+                                            <pre ng-bind-html>{{taskCommunicationLog(task).response_content}}</pre>
                                         </div>
                                     </div>
                                 </p>
