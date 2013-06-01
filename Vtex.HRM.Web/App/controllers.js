@@ -56,6 +56,7 @@ angular.module('hrm.controllers', [])
 
             // reset active tab
             activeTab = _.findWhere($scope.tabs, { active: true });
+            
             if (activeTab) activeTab.active = false;
 
             // get all checks
@@ -64,6 +65,8 @@ angular.module('hrm.controllers', [])
                 $scope.all = data.checks;
                 $scope.up = _.where($scope.all, { status: 'up' });
                 $scope.down = _.where($scope.all, { status: 'down' });
+                $scope.paused = _.where($scope.all, { status: 'paused' });
+                
                 $scope.beta = _.filter($scope.all, function (check) {
                     var pattern = /- Beta/;
                     return pattern.test(check.name);
@@ -128,7 +131,7 @@ angular.module('hrm.controllers', [])
                     alertStyle: "alert-info",
                     checks: [],
                     active: false,
-                    position: 4
+                    position: 5
                 },
                 {
                     label: "Beta",
@@ -136,7 +139,7 @@ angular.module('hrm.controllers', [])
                     alertStyle: "",
                     checks: [],
                     active: false,
-                    position: 5
+                    position: 6
                 },
                 {
                     label: "Stores",
@@ -144,7 +147,15 @@ angular.module('hrm.controllers', [])
                     alertStyle: "",
                     checks: [],
                     active: false,
-                    position: 6
+                    position: 7
+                },
+                {
+                    label: "Paused",
+                    badgeStyle: "",
+                    alertStyle: "",
+                    checks: [],
+                    active: false,
+                    position: 4
                 }
             ];
             //#endregion
@@ -158,7 +169,8 @@ angular.module('hrm.controllers', [])
             }, intervalInSeconds * 1000);
 
         };
-        //#endregion
+
+        //#endregion private
 
         //#region public
         $scope.isAutoRefresh = false;
