@@ -17,4 +17,20 @@ angular.module('hrm.filters', [])
             var loweCaseString = input.toLowerCase();
             return loweCaseString.substring(0, 1).toUpperCase() + loweCaseString.substring(1);
         };
+    })
+    .filter('jsonFormatter', function () {
+        return function (input) {
+            try {
+                var result = jsonlint.parse(input);
+
+                if (result) {
+                    return JSON.stringify(result, null, 4);
+                }
+
+                return input;
+
+            } catch (e) {
+                return input;
+            }
+        };
     });
