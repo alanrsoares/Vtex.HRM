@@ -40,7 +40,7 @@
                                     <a>Nome <i ng-show="predicate=='name'" ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[!reverse]"></i></a>
                                 </span>
                             </th>
-                            <th>
+                            <th class="hidden-phone">
                                 <span style="cursor: pointer" ng-click="predicate='hostname'; reverse=!reverse">
                                     <a>Host <i ng-show="predicate=='hostname'" ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[!reverse]"></i></a>
                                 </span>
@@ -55,7 +55,7 @@
                             </tr>
                             <tr ng-click="detail({{check.id}})" ng-repeat="check in paneOptions().filtered | filter:query | orderBy:predicate:reverse" ng-class="{error: check.status=='down'}">
                                 <td>{{check.name}}</td>
-                                <td>{{check.hostname}}</td>
+                                <td class="hidden-phone">{{check.hostname}}</td>
                                 <td>
                                     <img ng-src="Content/images/status-{{check.status}}.png" alt="{{check.status}}" /></td>
                                 <td nowrap="nowrap">
