@@ -56,7 +56,7 @@ angular.module('hrm.controllers', [])
 
             // reset active tab
             activeTab = _.findWhere($scope.tabs, { active: true });
-            
+
             if (activeTab) activeTab.active = false;
 
             // get all checks
@@ -66,7 +66,7 @@ angular.module('hrm.controllers', [])
                 $scope.up = _.where($scope.all, { status: 'up' });
                 $scope.down = _.where($scope.all, { status: 'down' });
                 $scope.paused = _.where($scope.all, { status: 'paused' });
-                
+
                 $scope.beta = _.filter($scope.all, function (check) {
                     var pattern = /- Beta/;
                     return pattern.test(check.name);
@@ -236,9 +236,17 @@ angular.module('hrm.controllers', [])
                         analysis.get({ checkId: $scope.check.id, analysisId: $scope.analysisResult[0].id }, function (analysisDetail) {
                             $scope.analysisDetail = analysisDetail;
                             var analysisTaskResult = $scope.analysisDetail.analysisresult.tasks[0].result;
-                            $scope.taskRawResponse = _.findWhere(analysisTaskResult, { name: "raw_response" }).value;
-                            $scope.communicationLog = _.findWhere(analysisTaskResult, { name: "communication_log" }).value[0];
+
+                            var rawResponse = _.findWhere(analysisTaskResult, { name: "raw_response" });
+                            
+                            $scope.taskRawResponse = rawResponse.value;
+
+                            var communicationLog = _.findWhere(analysisTaskResult, { name: "communication_log" });
+                            
+                            $scope.communicationLog = communicationLog.value[0];
+                            
                             $scope.responseHeaders = $scope.communicationLog.response_headers;
+                            
                         });
                     }
 
@@ -247,8 +255,12 @@ angular.module('hrm.controllers', [])
         });
 
         $scope.taskCommunicationLog = function (task) {
-            var result = _.findWhere(task.result, { name: 'communication_log' }).value[0];
-            return result;
+
+            var communicationLogs = _.findWhere(task.result, { name: 'communication_log' });
+
+            if (communicationLogs) return communicationLogs.value[0];
+
+            return false;
         };
 
     })
@@ -258,6 +270,7 @@ angular.module('hrm.controllers', [])
     .controller('AnalysisDetailCtrl', function ($scope, $rootScope, $routeParams, $location, analysis, probes) {
 
         $scope.checkId = $routeParams.id;
+        
         $scope.analysisId = $location.search()['analysisId'];
 
         if (!$scope.checkId) return false;
@@ -268,13 +281,11 @@ angular.module('hrm.controllers', [])
 
         if ($scope.analysisId) {
             //analysis detail
-
             analysis.get({ checkId: $scope.checkId, analysisId: $scope.analysisId }, function (data) {
                 $scope.analysisDetail = data;
             });
         } else {
             //analysis history
-
             analysis.get({ checkId: $scope.checkId }, function (data) {
                 $scope.analysisHistory = data.analysis;
 
@@ -282,8 +293,12 @@ angular.module('hrm.controllers', [])
         }
 
         $scope.taskCommunicationLog = function (task) {
-            var result = _.findWhere(task.result, { name: 'communication_log' }).value[0];
-            return result;
+
+            var communicationLogs = _.findWhere(task.result, { name: 'communication_log' });
+
+            if (communicationLogs) return communicationLogs.value[0];
+
+            return false;
         };
 
         return false;

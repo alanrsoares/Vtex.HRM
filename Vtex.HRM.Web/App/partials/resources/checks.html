@@ -32,38 +32,39 @@
                             </span>
                         </p>
                     </div>
-
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <th>
-                                <span style="cursor: pointer" ng-click="predicate='name'; reverse=!reverse">
-                                    <a>Nome <i ng-show="predicate=='name'" ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[!reverse]"></i></a>
-                                </span>
-                            </th>
-                            <th class="hidden-phone">
-                                <span style="cursor: pointer" ng-click="predicate='hostname'; reverse=!reverse">
-                                    <a>Host <i ng-show="predicate=='hostname'" ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[!reverse]"></i></a>
-                                </span>
-                            </th>
-                            <th>Status</th>
-                            <th>A&ccedil;&otilde;es</th>
-                        </thead>
-                        <tbody>
-                            <tr class="warning" ng-show="(paneOptions().filtered | filter:query).length==0">
-                                <td colspan="5" class="muted" style="text-align: center">nenhum resultado encontrado
-                                </td>
-                            </tr>
-                            <tr ng-click="detail({{check.id}})" ng-repeat="check in paneOptions().filtered | filter:query | orderBy:predicate:reverse" ng-class="{error: check.status=='down'}">
-                                <td>{{check.name}}</td>
-                                <td class="hidden-phone">{{check.hostname}}</td>
-                                <td>
-                                    <img ng-src="Content/images/status-{{check.status}}.png" alt="{{check.status}}" /></td>
-                                <td nowrap="nowrap">
-                                    <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="tableContainer">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <th>
+                                    <span style="cursor: pointer" ng-click="predicate='name'; reverse=!reverse">
+                                        <a>Nome <i ng-show="predicate=='name'" ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[!reverse]"></i></a>
+                                    </span>
+                                </th>
+                                <th class="hidden-phone">
+                                    <span style="cursor: pointer" ng-click="predicate='hostname'; reverse=!reverse">
+                                        <a>Host <i ng-show="predicate=='hostname'" ng-class="{true:'icon-chevron-up', false:'icon-chevron-down'}[!reverse]"></i></a>
+                                    </span>
+                                </th>
+                                <th>Status</th>
+                                <th>A&ccedil;&otilde;es</th>
+                            </thead>
+                            <tbody>
+                                <tr class="warning" ng-show="(paneOptions().filtered | filter:query).length==0">
+                                    <td colspan="5" class="muted" style="text-align: center">nenhum resultado encontrado
+                                    </td>
+                                </tr>
+                                <tr ng-click="detail({{check.id}})" ng-repeat="check in paneOptions().filtered | filter:query | orderBy:predicate:reverse" ng-class="{error: check.status=='down'}">
+                                    <td>{{check.name}}</td>
+                                    <td class="hidden-phone">{{check.hostname}}</td>
+                                    <td>
+                                        <img ng-src="Content/images/status-{{check.status}}.png" alt="{{check.status}}" /></td>
+                                    <td nowrap="nowrap">
+                                        <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </p>
             </div>
 
