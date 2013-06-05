@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8318DF
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vtex.HRM.API", "Vtex.HRM.WebApi\Vtex.HRM.API.csproj", "{6F9E4DC7-75D1-4DA5-AD4F-34494445D583}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vtex.HRM.WebApi", "Vtex.HRM.WebApi\Vtex.HRM.WebApi.csproj", "{6F9E4DC7-75D1-4DA5-AD4F-34494445D583}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
