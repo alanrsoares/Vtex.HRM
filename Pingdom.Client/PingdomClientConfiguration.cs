@@ -8,7 +8,7 @@
 
         public string Version { get; private set; }
 
-        public string BaseUrl { get; private set; }
+        public string BaseAddress { get; private set; }
 
         public string UserName { get; private set; }
 
@@ -18,7 +18,7 @@
         {
             AppKey = GetConfigurationKey("AppKey");
             Version = GetConfigurationKey("Version");
-            BaseUrl = GetConfigurationKey("BaseUrl");
+            BaseAddress = GetConfigurationKey("BaseUrl");
             UserName = GetConfigurationKey("UserName");
             Password = GetConfigurationKey("Password");
         }
