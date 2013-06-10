@@ -183,6 +183,7 @@
     <Content Include="App\partials\resources.html" />
     <Content Include="App\partials\resources\analysis.html" />
     <Content Include="App\partials\resources\analysisDetail.html" />
+    <Content Include="App\partials\resources\checks.html" />
     <Content Include="App\partials\resources\checksDetail.html" />
     <Content Include="App\partials\resources\urlRouter.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -273,7 +274,6 @@
     <Content Include="App\filters.js" />
     <Content Include="App\services.js" />
     <Content Include="App\partials\home.html" />
-    <Content Include="App\partials\resources\checks.html" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
     <Content Include="Scripts\angular-bootstrap.js" />

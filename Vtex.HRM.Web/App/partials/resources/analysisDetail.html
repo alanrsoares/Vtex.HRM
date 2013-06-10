@@ -1,4 +1,10 @@
 ﻿<section id="analysisDetail" ng-controller="AnalysisDetailCtrl">
+    <ul class="breadcrumb">
+        <li><a href="#/">Home</a> <span class="divider">/</span></li>
+        <li><a href="#/resources">Resources</a> <span class="divider">/</span></li>
+        <li><a href="#/checks">Analysis</a> <span class="divider">/</span></li>
+        <li class="active">{{check.id}}</li>
+    </ul>
 
     <div ng-show="!analysisId && !analysisHistory" class="alert alert-info">
         Carregando histórico de análises...

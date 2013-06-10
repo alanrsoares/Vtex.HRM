@@ -1,4 +1,9 @@
-<section id="checks" ng-controller="ChecksCtrl">
+﻿<section id="checks" ng-controller="ChecksCtrl">
+    <ul class="breadcrumb">
+        <li><a href="#/">Home</a> <span class="divider">/</span></li>
+        <li><a href="#/resources">Resources</a> <span class="divider">/</span></li>
+        <li class="active">Checks</li>
+    </ul>
 
     <div class="page-header">
         <h1>Checks <small><a href="/api/checks" target="_blank">/api/checks</a></small></h1>
@@ -46,7 +51,7 @@
                                     </span>
                                 </th>
                                 <th>Status</th>
-                                <th>A&ccedil;&otilde;es</th>
+                                <th>Ações</th>
                             </thead>
                             <tbody>
                                 <tr class="warning" ng-show="(paneOptions().filtered | filter:query).length==0">
@@ -59,7 +64,11 @@
                                     <td>
                                         <img ng-src="Content/images/status-{{check.status}}.png" alt="{{check.status}}" /></td>
                                     <td nowrap="nowrap">
-                                        <a class="btn" href="#/resources/checks/{{check.id}}" title="visualizar detalhe deste check"><span class="hidden-phone">detalhe</span> <i class='icon-search'></i></a>
+                                        <div class="btn-group">
+                                            <a class="btn" href="#/resources/checks/{{check.id}}" title="visualizar detalhe deste check"><span class="hidden-phone">detalhe</span> <i class='icon-search'></i></a>
+                                            <a class="btn" href="#/resources/analysis/{{check.id}}" title="visualizar histórico de análises"><span class="hidden-phone">análises</span> <i class='icon-list'></i></a>
+                                        </div>
+
                                     </td>
                                 </tr>
                             </tbody>
