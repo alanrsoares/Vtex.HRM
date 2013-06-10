@@ -196,6 +196,7 @@
     <Content Include="Content\images\hrm-icon.png" />
     <Content Include="Content\images\status-down.png" />
     <Content Include="Content\images\status-paused.png" />
+    <Content Include="Content\images\status-unknown.png" />
     <Content Include="Content\images\status-up.png" />
     <Content Include="Content\select2-spinner.gif" />
     <Content Include="Content\select2.css" />

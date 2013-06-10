@@ -29,6 +29,16 @@ angular.module('hrm.directives', [])
                 analysisDetail: "=",
                 analysisId: "=",
                 probes: "="
-            }
+            },
+            link: function ($scope, element, attributes) {
+                $scope.taskCommunicationLog = function (task) {
+
+                    var communicationLogs = _.findWhere(task.result, { name: 'communication_log' });
+
+                    if (communicationLogs) return communicationLogs.value[0];
+
+                    return false;
+                };
+            },
         };
     });

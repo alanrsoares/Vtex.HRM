@@ -11,25 +11,27 @@
                 </small></h1>
         </div>
 
-        <ul>
-            <li>
-                <strong>Nome</strong>: {{check.name}}
-            </li>
-            <li>
-                <strong>Url monitorada</strong>: <a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a>
-            </li>
-            <li>
-                <strong>Status</strong>:
+        <div class="well">
+            <ul>
+                <li>
+                    <strong>Nome</strong>: {{check.name}}
+                </li>
+                <li>
+                    <strong>Url monitorada</strong>: <a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a>
+                </li>
+                <li>
+                    <strong>Status</strong>:
                
-                <img ng-src="{{statusIcon}}" alt="{{check.status}}" />
-            </li>
-            <li>
-                <strong>Criado em</strong>: {{check.created | unixDate}}
-            </li>
-            <li ng-show="check.lasterrortime">
-                <strong>Último erro capturado em</strong>: {{check.lasterrortime | unixDate}}
-            </li>
-        </ul>
+                    <img ng-src="{{statusIcon}}" alt="{{check.status}}" />
+                </li>
+                <li>
+                    <strong>Criado em</strong>: {{check.created | unixDate}}
+                </li>
+                <li ng-show="check.lasterrortime">
+                    <strong>Último erro capturado em</strong>: {{check.lasterrortime | unixDate}}
+                </li>
+            </ul>
+        </div>
 
         <analysis-detail analysis-detail="analysisDetail" probes="probes" analysis-id="analysisId" />
 

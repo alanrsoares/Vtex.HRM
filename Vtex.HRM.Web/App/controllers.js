@@ -253,16 +253,6 @@ angular.module('hrm.controllers', [])
                 });
             }
         });
-
-        $scope.taskCommunicationLog = function (task) {
-
-            var communicationLogs = _.findWhere(task.result, { name: 'communication_log' });
-
-            if (communicationLogs) return communicationLogs.value[0];
-
-            return false;
-        };
-
     })
 //#endregion Checks
 
@@ -291,16 +281,7 @@ angular.module('hrm.controllers', [])
 
             });
         }
-
-        $scope.taskCommunicationLog = function (task) {
-
-            var communicationLogs = _.findWhere(task.result, { name: 'communication_log' });
-
-            if (communicationLogs) return communicationLogs.value[0];
-
-            return false;
-        };
-
+        
         return false;
     });
 //#endregion Analysis
