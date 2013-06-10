@@ -36,11 +36,6 @@
         </table>
     </div>
 
-    <div ng-show="analysisId && !analysisDetail" class="alert alert-info">
-        Carregando de análises {{analysisId}}...
-   
-    </div>
-
-    <analysis-detail analysis-detail="analysisDetail" probes="probes"/>
+    <analysis-detail analysis-detail="analysisDetail" probes="probes" analysis-id="analysisId" />
 
 </section>

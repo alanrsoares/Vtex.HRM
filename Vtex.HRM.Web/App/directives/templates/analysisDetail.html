@@ -1,45 +1,54 @@
-﻿<div id="analysisDetailContainer" ng-show="analysisDetail">
+﻿<section id="analysisDetailContainer">
+    <div ng-show="analysisId && !analysisDetail" class="alert alert-info">
+        Carregando análise #{{analysisId}}...
+    </div>
 
-    <div class="page-header">
-        <h1>Análise - Detalhe
+    <div ng-show="analysisDetail">
+
+        <div class="page-header">
+            <h1>Análise - Detalhe
                
             <small>
-                <a class="btn" href="/api/analysis/{{checkId}}/?analysisId={{analysisId}}">{ json source }</a>
+                <a class="btn" href="/api/analysis/{{analysisDetail.analysisresult.sensor_pk}}/?analysisId={{analysisId}}">{ json source }</a>
             </small>
-        </h1>
-    </div>
+            </h1>
+        </div>
 
-    <div>
-        <p class="float-right">
-            <a class="btn btn-info float-right" href="#/resources/analysis/{{checkId}}"><i class="icon-list icon-white"></i>&nbsp; ver histórico</a>
-        </p>
-    </div>
+        <div>
+            <p class="float-right">
+                <a class="btn btn-info float-right" href="#/resources/analysis/{{analysisDetail.analysisresult.sensor_pk}}"><i class="icon-list icon-white"></i>&nbsp; ver histórico</a>
+            </p>
+        </div>
 
-    <div class="well">
-        <ul>
-            <li><strong>Status</strong>: 
+        <div class="well">
+            <ul>
+                <li>
+                    <strong>Status</strong>: 
+               
                 <pre style="background: white">{{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}</pre>
-            </li>
-            <li><strong>Status de Confirmação</strong>: 
-                   
+                </li>
+                <li>
+                    <strong>Status de Confirmação</strong>: 
+               
                 <pre style="background: white">{{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}</pre>
-            </li>
-            <li><strong>Tipo</strong>: 
-                   
+                </li>
+                <li>
+                    <strong>Tipo</strong>: 
+               
                 <pre style="background: white">{{analysisDetail.analysisresult.analysis_type}}</pre>
-            </li>
-            <li><strong>Disparado em</strong>: 
-                   
+                </li>
+                <li>
+                    <strong>Disparado em</strong>: 
+               
                 <pre style="background: white">{{analysisDetail.analysisresult.time_triggered | unixDate}}</pre>
-            </li>
-            <li>
-                <strong>Análises</strong>:
+                </li>
+                <li>
+                    <strong>Análises</strong>:
                    
                 <div class="well" style="background: white">
                     <ul class="nav nav-tabs" id="checkTabsList">
                         <li ng-repeat="task in analysisDetail.analysisresult.tasks" ng-class="{active:task==analysisDetail.analysisresult.tasks[0]}">
-                            <a showtab href="#task-{{task.analyzer_id}}">
-                                {{(probes | filter:{id : task.analyzer_id})[0].name }}
+                            <a showtab href="#task-{{task.analyzer_id}}">{{(probes | filter:{id : task.analyzer_id})[0].name }}
                             </a>
                         </li>
                     </ul>
@@ -91,8 +100,8 @@
                         </div>
                     </div>
                 </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
     </div>
-
-</div>
+</section>

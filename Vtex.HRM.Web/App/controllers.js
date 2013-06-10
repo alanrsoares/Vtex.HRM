@@ -232,21 +232,21 @@ angular.module('hrm.controllers', [])
                     if (analysisResult && analysisResult.analysis.length > 0) {
 
                         $scope.analysisResult = analysisResult.analysis;
-
-                        analysis.get({ checkId: $scope.check.id, analysisId: $scope.analysisResult[0].id }, function (analysisDetail) {
+                        $scope.analysisId = $scope.analysisResult[0].id;
+                        analysis.get({ checkId: $scope.check.id, analysisId: $scope.analysisId }, function (analysisDetail) {
                             $scope.analysisDetail = analysisDetail;
                             var analysisTaskResult = $scope.analysisDetail.analysisresult.tasks[0].result;
 
                             var rawResponse = _.findWhere(analysisTaskResult, { name: "raw_response" });
-                            
+
                             $scope.taskRawResponse = rawResponse.value;
 
                             var communicationLog = _.findWhere(analysisTaskResult, { name: "communication_log" });
-                            
+
                             $scope.communicationLog = communicationLog.value[0];
-                            
+
                             $scope.responseHeaders = $scope.communicationLog.response_headers;
-                            
+
                         });
                     }
 
@@ -270,7 +270,7 @@ angular.module('hrm.controllers', [])
     .controller('AnalysisDetailCtrl', function ($scope, $rootScope, $routeParams, $location, analysis, probes) {
 
         $scope.checkId = $routeParams.id;
-        
+
         $scope.analysisId = $location.search()['analysisId'];
 
         if (!$scope.checkId) return false;

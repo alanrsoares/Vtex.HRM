@@ -27,9 +27,8 @@ angular.module('hrm.directives', [])
             templateUrl: '/app/directives/templates/analysisDetail.html',
             scope: {
                 analysisDetail: "=",
+                analysisId: "=",
                 probes: "="
             }
         };
     });
-
-
