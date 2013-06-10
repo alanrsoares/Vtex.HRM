@@ -1,4 +1,10 @@
 ﻿<section id="checksDetail" ng-controller="ChecksDetailCtrl">
+    <ul class="breadcrumb">
+        <li><a href="#/">Home</a> <span class="divider">/</span></li>
+        <li><a href="#/resources">Resources</a> <span class="divider">/</span></li>
+        <li><a href="#/checks">Checks</a> <span class="divider">/</span></li>
+        <li class="active">{{check.id}}</li>
+    </ul>
 
     <div class="alert alert-info" ng-show="!check">Carregando check...</div>
 

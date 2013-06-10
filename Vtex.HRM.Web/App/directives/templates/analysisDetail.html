@@ -1,5 +1,5 @@
 ﻿<section id="analysisDetailContainer">
-
+    
     <div ng-show="analysisId && !analysisDetail" class="alert alert-info">
         Carregando análise...
     </div>
@@ -19,18 +19,27 @@
         </div>
 
         <div class="well well-large" style="background: white">
-            <b>Status</b>: 
-           
-            <pre>{{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}</pre>
+            <div class="row-fluid">
+                <div class="span6">
+                    <b>Status</b>:
+                    <pre>{{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}</pre>
+                </div>
+                <div class="span6">
+                    <b>Status de Confirmação</b>:
+                    <pre>{{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}</pre>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <b>Tipo</b>:
+                    <pre>{{analysisDetail.analysisresult.analysis_type}}</pre>
+                </div>
+                <div class="span6">
+                    <b>Disparado em</b>:
+                    <pre>{{analysisDetail.analysisresult.time_triggered | unixDate}}</pre>
+                </div>
+            </div>
 
-            <b>Status de Confirmação</b>:
-            <pre>{{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}</pre>
-
-            <b>Tipo</b>:
-            <pre>{{analysisDetail.analysisresult.analysis_type}}</pre>
-
-            <b>Disparado em</b>:
-            <pre>{{analysisDetail.analysisresult.time_triggered | unixDate}}</pre>
         </div>
 
         <div class="well" style="background: white">
@@ -43,17 +52,26 @@
             <div class="tab-content">
                 <div class="tab-pane" ng-repeat="task in analysisDetail.analysisresult.tasks" id="task-{{task.analyzer_id}}" ng-class="{active:task==analysisDetail.analysisresult.tasks[0]}">
                     <p>
-                        <b>Início</b>:
-                        <pre>{{task.time_start | unixDate}}</pre>
-
-                        <b>Fim</b>:
-                        <pre>{{task.time_end | unixDate}}</pre>
-
-                        <b>Status</b>:
-                        <pre>{{task.status}}</pre>
-
-                        <b>Mensagem</b>:
-                        <pre>{{(task.result | filter:{name:'message'})[0].value}}</pre>
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <b>Análise iniciada em </b>
+                                <pre>{{task.time_start | unixDate}}</pre>
+                            </div>
+                            <div class="span6">
+                                <b>Fim</b>:
+                                <pre>{{task.time_end | unixDate}}</pre>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <b>Status</b>:
+                                <pre>{{task.status}}</pre>
+                            </div>
+                            <div class="span6">
+                                <b>Mensagem</b>:
+                                <pre>{{(task.result | filter:{name:'message'})[0].value}}</pre>
+                            </div>
+                        </div>
                     </p>
                     <p>
                         <div ng-show="taskCommunicationLog(task)">
