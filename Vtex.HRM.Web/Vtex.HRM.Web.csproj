@@ -178,6 +178,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\controllers\checks.js" />
     <Content Include="App\directives\templates\analysisDetail.html" />
     <Content Include="App\partials\resources.html" />
     <Content Include="App\partials\resources\analysis.html" />
@@ -651,9 +652,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\services\" />
-    <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

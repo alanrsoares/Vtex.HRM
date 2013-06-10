@@ -53,13 +53,13 @@
                                     <td colspan="5" class="muted" style="text-align: center">nenhum resultado encontrado
                                     </td>
                                 </tr>
-                                <tr ng-click="detail({{check.id}})" ng-repeat="check in paneOptions().filtered | filter:query | orderBy:predicate:reverse" ng-class="{error: check.status=='down'}">
+                                <tr style="cursor: pointer" ng-click="goToDetail(check)" ng-repeat="check in paneOptions().filtered | filter:query | orderBy:predicate:reverse" ng-class="{error: check.status=='down'}">
                                     <td>{{check.name}}</td>
                                     <td class="hidden-phone">{{check.hostname}}</td>
                                     <td>
                                         <img ng-src="Content/images/status-{{check.status}}.png" alt="{{check.status}}" /></td>
                                     <td nowrap="nowrap">
-                                        <a href="#/resources/checks/{{check.id}}">detalhe <i class='icon-share-alt'></i></a>
+                                        <a class="btn" href="#/resources/checks/{{check.id}}" title="visualizar detalhe deste check"><span class="hidden-phone">detalhe</span> <i class='icon-search'></i></a>
                                     </td>
                                 </tr>
                             </tbody>
