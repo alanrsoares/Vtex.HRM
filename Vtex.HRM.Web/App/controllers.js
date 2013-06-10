@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('hrm.controllers', [])
+
     .controller("MainCtrl", function ($rootScope) {
         $rootScope.pageTitle = "Home";
     })
@@ -19,7 +20,6 @@ angular.module('hrm.controllers', [])
     .controller("ResourcesCtrl", function ($rootScope) {
         $rootScope.pageTitle = "Resources";
     })
-
 //#region Resource Controllers
 
 //#region Checks

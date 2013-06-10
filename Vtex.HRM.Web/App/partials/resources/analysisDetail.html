@@ -2,6 +2,7 @@
 
     <div ng-show="!analysisId && !analysisHistory" class="alert alert-info">
         Carregando histórico de análises...
+   
     </div>
 
     <div id="analysisHistoryContainer" ng-show="analysisHistory">
@@ -37,93 +38,9 @@
 
     <div ng-show="analysisId && !analysisDetail" class="alert alert-info">
         Carregando de análises {{analysisId}}...
+   
     </div>
-    <div id="analysisDetailContainer" ng-show="analysisDetail">
 
-        <div class="page-header">
-            <h1>Análise - Detalhe
-                <small>
-                    <a class="btn" href="/api/analysis/{{checkId}}/?analysisId={{analysisId}}">{ json source }</a>
-                </small>
-            </h1>
-        </div>
-
-        <div>
-            <p class="float-right">
-                <a class="btn btn-info float-right" href="#/resources/analysis/{{checkId}}"><i class="icon-list icon-white"></i>&nbsp; ver histórico</a>
-            </p>
-        </div>
-
-        <div class="well">
-            <ul>
-                <li><strong>Status</strong>: 
-                    <pre style="background: white">{{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}</pre>
-                </li>
-                <li><strong>Status de Confirmação</strong>: 
-                    <pre style="background: white">{{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}</pre>
-                </li>
-                <li><strong>Tipo</strong>: 
-                    <pre style="background: white">{{analysisDetail.analysisresult.analysis_type}}</pre>
-                </li>
-                <li><strong>Disparado em</strong>: 
-                    <pre style="background: white">{{analysisDetail.analysisresult.time_triggered | unixDate}}</pre>
-                </li>
-                <li>
-                    <strong>Análises</strong>:
-                    <div class="well" style="background: white">
-                        <ul class="nav nav-tabs" id="checkTabsList">
-                            <li ng-repeat="task in analysisDetail.analysisresult.tasks" ng-class="{active:task==analysisDetail.analysisresult.tasks[0]}">{{getProbeByTask(task).name}}
-                                <a showtab href="#task-{{task.analyzer_id}}">{{(probes | filter:{id : task.analyzer_id})[0].name }}</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane" ng-repeat="task in analysisDetail.analysisresult.tasks" id="task-{{task.analyzer_id}}" ng-class="{active:task==analysisDetail.analysisresult.tasks[0]}">
-                                <p>
-                                    <strong>Início</strong>:
-                                    <pre>{{task.time_start | unixDate}}</pre>
-
-                                    <strong>Fim</strong>:
-                                    <pre>{{task.time_end | unixDate}}</pre>
-
-                                    <strong>Status</strong>:
-                                    <pre>{{task.status}}</pre>
-
-                                    <strong>Mensagem</strong>:
-                                    <pre>{{(task.result | filter:{name:'message'})[0].value}}</pre>
-                                </p>
-                                <p>
-                                    <div ng-show="taskCommunicationLog(task)">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active">
-                                                <a showtab href="#request-{{task.analyzer_id}}">Requisição</a>
-                                            </li>
-                                            <li>
-                                                <a showtab href="#headers-{{task.analyzer_id}}">Cabeçalhos</a>
-                                            </li>
-                                            <li>
-                                                <a showtab href="#content-{{task.analyzer_id}}">Conteúdo</a>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="request-{{task.analyzer_id}}">
-                                                <pre>{{taskCommunicationLog(task).request}}</pre>
-                                            </div>
-                                            <div class="tab-pane" id="headers-{{task.analyzer_id}}">
-                                                <pre><ul><li ng-repeat="header in taskCommunicationLog(task).response_headers"><strong>{{header.name}}</strong>: {{header.value}}</li></ul></pre>
-                                            </div>
-                                            <div class="tab-pane" id="content-{{task.analyzer_id}}">
-                                                <pre>{{taskCommunicationLog(task).response_content | jsonFormatter}}</pre>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-    </div>
+    <analysis-detail analysis-detail="analysisDetail" probes="probes"/>
 
 </section>

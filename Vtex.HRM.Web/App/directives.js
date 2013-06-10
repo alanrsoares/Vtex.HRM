@@ -1,4 +1,5 @@
 'use strict';
+
 /* http://docs-next.angularjs.org/api/angular.module.ng.$compileProvider.directive */
 
 
@@ -19,12 +20,16 @@ angular.module('hrm.directives', [])
                 }
             };
         })
-    .directive('forceDirectedGraph',
-        function () {
-            return {
-                link: function (scope, element) {
-                    element[0].append($('<span />', { text: 'hello' }));
-                }
-            };
-        });
+    .directive('analysisDetail', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: '/app/directives/templates/analysisDetail.html',
+            scope: {
+                analysisDetail: "=",
+                probes: "="
+            }
+        };
+    });
+
 

@@ -178,6 +178,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\directives\templates\analysisDetail.html" />
     <Content Include="App\partials\resources.html" />
     <Content Include="App\partials\resources\analysis.html" />
     <Content Include="App\partials\resources\analysisDetail.html" />
@@ -648,6 +649,7 @@
     <Content Include="Views\Home\Async.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\services\" />
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
