@@ -38,26 +38,23 @@ namespace Pingdom.Client
 
         #region Rest Methods
 
-        public async Task<JsonStringResult> Get(string apiMethod)
+        public Task<string> GetAsync(string apiMethod)
         {
-            var result = await _baseClient.GetStringAsync(apiMethod);
-
-            return new JsonStringResult(result);
+            return _baseClient.GetStringAsync(apiMethod);
         }
 
-        public async Task<JsonStringResult> PostAsync(string apiMethod, object data)
+        public async Task<string> PostAsync(string apiMethod, object data)
         {
             var response = await _baseClient.PostAsJsonAsync(apiMethod, data);
-            var responseContent = response.Content;
-            var contentString = await responseContent.ReadAsStringAsync();
 
-            return new JsonStringResult(contentString);
+            var responseContent = response.Content;
+
+            return await responseContent.ReadAsStringAsync();
         }
 
-        public async Task<JsonStringResult> PutAsync(string apiMethod, object data)
+        public Task<string> PutAsync(string apiMethod, object data)
         {
-            var response = await SendAsync(apiMethod, data, HttpMethod.Put);
-            return new JsonStringResult(response);
+            return SendAsync(apiMethod, data, HttpMethod.Put);
         }
 
         public async Task<JsonStringResult> DeleteAsync(string apiMethod)
@@ -76,12 +73,12 @@ namespace Pingdom.Client
 
         #region Private Methods
 
-        private async Task<dynamic> SendAsync(string apiMethod, HttpMethod httpMethod)
+        private Task<string> SendAsync(string apiMethod, HttpMethod httpMethod)
         {
-            return await SendAsync(apiMethod, null, httpMethod);
+            return SendAsync(apiMethod, null, httpMethod);
         }
 
-        private async Task<dynamic> SendAsync(string apiMethod, object data, HttpMethod httpMethod)
+        private async Task<string> SendAsync(string apiMethod, object data, HttpMethod httpMethod)
         {
             var request = new HttpRequestMessage(httpMethod, apiMethod);
 
@@ -89,7 +86,7 @@ namespace Pingdom.Client
 
             var response = await _baseClient.SendAsync(request);
 
-            return response.Content.ReadAsStringAsync();
+            return await response.Content.ReadAsStringAsync();
         }
 
         private static FormUrlEncodedContent GetFormUrlEncodedContent(object anonymousObject)

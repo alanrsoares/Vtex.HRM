@@ -14,7 +14,7 @@ namespace Vtex.HRM.WebApi.Controllers
         public async Task<dynamic> Get()
         {
             var result = await _resource.GetProbeServerList();
-            return result.ToDynamicObject();
+            return new JsonStringResult(result).ToDynamicObject();
         }
     }
 }

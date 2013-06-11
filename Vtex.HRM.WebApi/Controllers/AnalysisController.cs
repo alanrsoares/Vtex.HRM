@@ -15,7 +15,7 @@ namespace Vtex.HRM.WebApi.Controllers
         {
             var checkId = id;
             var result = await _resource.GetRootCauseAnalysisResultsList(checkId);
-            return result.ToDynamicObject();
+            return new JsonStringResult(result).ToDynamicObject();
         }
 
         // GET api/analysis/5/6
@@ -24,7 +24,7 @@ namespace Vtex.HRM.WebApi.Controllers
         {
             var checkId = id;
             var result = await _resource.GetRawAnalysisResults(checkId, analysisId);
-            return result.ToDynamicObject();
+            return new JsonStringResult(result).ToDynamicObject();
         }
 
         // POST api/checks

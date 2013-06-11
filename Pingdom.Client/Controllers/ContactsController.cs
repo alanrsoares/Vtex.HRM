@@ -4,9 +4,9 @@ namespace Pingdom.Client.Controllers
 {
     public class ContactsController : ResourceController
     {
-        public async Task<JsonStringResult> GetContactsList()
+        public Task<string> GetContactsList()
         {
-            return await Client.Get("contacts/");
+            return Client.GetAsync("contacts/");
         }
     }
 }

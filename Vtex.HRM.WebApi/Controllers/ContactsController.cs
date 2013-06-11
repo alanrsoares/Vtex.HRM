@@ -12,7 +12,7 @@ namespace Vtex.HRM.WebApi.Controllers
         public async Task<dynamic> Get()
         {
             var result = await _resource.GetContactsList();
-            return result.ToDynamicObject();
+            return new JsonStringResult(result).ToDynamicObject();
         }
     }
 }

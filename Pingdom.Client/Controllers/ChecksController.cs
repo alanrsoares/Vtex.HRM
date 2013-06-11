@@ -6,29 +6,29 @@ namespace Pingdom.Client.Controllers
 
     public sealed class ChecksController : ResourceController
     {
-        public async Task<JsonStringResult> GetChecksList()
+        public Task<string> GetChecksList()
         {
-            return await Client.GetAsync("checks/");
+            return Client.GetAsync("checks/");
         }
 
-        public Task<JsonStringResult> GetDetailedCheckInformation(int checkId)
+        public Task<string> GetDetailedCheckInformation(int checkId)
         {
             return Client.GetAsync(string.Format("checks/{0}", checkId));
         }
 
-        public async Task<JsonStringResult> CreateNewCheck(object check)
+        public Task<string> CreateNewCheck(object check)
         {
-            return await Client.PostAsync("checks/", check);
+            return Client.PostAsync("checks/", check);
         }
 
-        public async Task<JsonStringResult> ModifyCheck(int checkId, object check)
+        public Task<string> ModifyCheck(int checkId, object check)
         {
-            return await Client.PutAsync(string.Format("checks/{0}", checkId), check);
+            return Client.PutAsync(string.Format("checks/{0}", checkId), check);
         }
 
-        public async Task<JsonStringResult> ModifyMultipleChecks(object modifyMultipleChecksRequest)
+        public Task<string> ModifyMultipleChecks(object modifyMultipleChecksRequest)
         {
-            return await Client.PutAsync("checks/", modifyMultipleChecksRequest);
+            return Client.PutAsync("checks/", modifyMultipleChecksRequest);
         }
 
         public Task<JsonStringResult> DeleteCheck(int checkId)

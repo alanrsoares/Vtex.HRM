@@ -15,7 +15,7 @@ namespace Vtex.HRM.WebApi.Controllers
         public async Task<dynamic> Get()
         {
             var result = await _resource.GetChecksList();
-            return result.ToDynamicObject();
+            return new JsonStringResult(result).ToDynamicObject();
         }
 
         // GET api/checks/5
@@ -23,14 +23,14 @@ namespace Vtex.HRM.WebApi.Controllers
         public async Task<dynamic> Get(int id)
         {
             var result = await _resource.GetDetailedCheckInformation(id);
-            return result.ToDynamicObject();
+            return new JsonStringResult(result).ToDynamicObject();
         }
 
         // POST api/checks
         public async Task<dynamic> Post([FromBody]object check)
         {
             var result = await _resource.CreateNewCheck(check);
-            return result.ToDynamicObject();
+            return new JsonStringResult(result).ToDynamicObject();
         }
 
         // PUT api/checks/5
