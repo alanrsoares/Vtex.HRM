@@ -1,9 +1,6 @@
 'use strict';
 
-/* http://docs-next.angularjs.org/api/angular.module.ng.$compileProvider.directive */
-
-
-angular.module('hrm.directives', [])
+var hrmDirectives = angular.module('hrm.directives', [])
     .directive('appVersion', ['version', function (version) {
         return function (scope, elm) {
             elm.text(version);
@@ -30,8 +27,9 @@ angular.module('hrm.directives', [])
                 analysisId: "=",
                 probes: "="
             },
-            link: function ($scope, element, attributes) {
-                $scope.taskCommunicationLog = function (task) {
+            link: function (scope, element, attributes) {
+                
+                scope.taskCommunicationLog = function (task) {
 
                     var communicationLogs = _.findWhere(task.result, { name: 'communication_log' });
 
@@ -39,6 +37,6 @@ angular.module('hrm.directives', [])
 
                     return false;
                 };
-            },
+            }
         };
     });

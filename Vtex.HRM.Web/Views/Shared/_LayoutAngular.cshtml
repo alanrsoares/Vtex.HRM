@@ -60,21 +60,19 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-    <script src="~/Scripts/moment.min.js"></script>
-    <script src="~/Scripts/json2.js"></script>
-    <script src="~/Scripts/jsonlint.js"></script>
-    <script src="~/Scripts/angular-strap.min.js"></script>
-    <script src="~/Scripts/angular-resource.js"></script>
-    <script src="~/App/app.js"></script>
-    <script src="~/App/services.js"></script>
-    <script src="~/App/directives.js"></script>
-    <script src="~/App/filters.js"></script>
-    <script src="~/App/controllers.js"></script>
-    <script src="~/App/controllers/checks.js"></script>
+
+    @Scripts.Render(
+    "~/bundles/jquery",
+    "~/bundles/json",
+    "~/bundles/angular",
+    "~/bundles/bootstrap",
+    "~/bundles/underscore",
+    "~/Scripts/moment.min.js",
+    "~/App/app.js",
+    "~/bundles/services",
+    "~/bundles/directives",
+    "~/bundles/filters",
+    "~/bundles/controllers")
 
     @RenderSection("scripts", false)
 

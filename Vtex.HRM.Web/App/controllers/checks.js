@@ -1,4 +1,6 @@
-﻿hrm
+﻿'use strict';
+
+hrmControllers
     .controller('ChecksCtrl', function ($scope, $rootScope, $location, checks) {
 
         //#region private
@@ -159,7 +161,7 @@
                 paneOptions = {
                     filtered: tab.checks,
                     tabName: tab.label,
-                    alertStyle: tab.alertStyle,
+                    alertStyle: tab.alertStyle
                 };
 
                 activeTab = tab;
