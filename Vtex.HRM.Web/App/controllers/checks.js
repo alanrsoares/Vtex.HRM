@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-hrmControllers
-    .controller('ChecksCtrl', function ($scope, $rootScope, $location, checks) {
+var ChecksCtrl = ['$scope', '$rootScope', '$location', 'checks',
+    function ($scope, $rootScope, $location, checks) {
 
         //#region private
         var activeTab = null;
@@ -182,8 +182,10 @@ hrmControllers
         //#endregion
 
         init();
-    })
-    .controller('ChecksDetailCtrl', function ($scope, $rootScope, $routeParams, checks, analysis, probes) {
+    }];
+
+var ChecksDetailCtrl = ['$scope', '$rootScope', '$routeParams', 'checks', 'analysis', 'probes',
+    function ($scope, $rootScope, $routeParams, checks, analysis, probes) {
 
         // get detailed check :id
         $scope.checkId = $routeParams.id;
@@ -226,8 +228,7 @@ hrmControllers
 
                         });
                     }
-
                 });
             }
         });
-    });
+    }];

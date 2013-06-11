@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-hrmControllers
-    .controller('AnalysisDetailCtrl', function ($scope, $rootScope, $routeParams, $location, analysis, probes) {
+var AnalysisDetailCtrl = ['$scope', '$rootScope', '$routeParams', '$location', 'analysis', 'probes',
+    function ($scope, $rootScope, $routeParams, $location, analysis, probes) {
 
         $scope.checkId = $routeParams.id;
 
@@ -27,4 +27,4 @@ hrmControllers
         }
 
         return false;
-    });
+    }];

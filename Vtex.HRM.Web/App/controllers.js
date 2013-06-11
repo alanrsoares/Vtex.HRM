@@ -1,26 +1,23 @@
 'use strict';
 
-var hrmControllers = angular.module('hrm.controllers', [])
-    .controller("MainCtrl", function ($rootScope) {
-        $rootScope.pageTitle = "Home";
-    })
-    .controller("ResourcesRouteCtrl", function ($scope, $rootScope, $routeParams) {
+var hrmControllers = angular.module('hrm.controllers', []);
 
-        if ($routeParams.resource) {
+var MainCtrl = ['$rootScope', function ($rootScope) {
+    $rootScope.pageTitle = "Home";
+}];
 
-            $rootScope.pageTitle = $routeParams.resource;
+var ResourcesRouteCtrl = ['$scope', '$rootScope', '$routeParams', function ($scope, $rootScope, $routeParams) {
 
-            $scope.templateUrl = $routeParams.id
-                ? $scope.templateUrl = '/app/partials/resources/' + $routeParams.resource + 'Detail.html'
-                : $scope.templateUrl = '/app/partials/resources/' + $routeParams.resource + '.html';
-        }
+    if ($routeParams.resource) {
 
-    })
-    .controller("ResourcesCtrl", function ($rootScope) {
-        $rootScope.pageTitle = "Resources";
-    });
-//#region Resource Controllers
+        $rootScope.pageTitle = $routeParams.resource;
 
+        $scope.templateUrl = $routeParams.id
+            ? $scope.templateUrl = '/app/partials/resources/' + $routeParams.resource + 'Detail.html'
+            : $scope.templateUrl = '/app/partials/resources/' + $routeParams.resource + '.html';
+    }
+}];
 
-
-//#endregion
+var ResourcesCtrl = ['$rootScope', function ($rootScope) {
+    $rootScope.pageTitle = "Resources";
+}];

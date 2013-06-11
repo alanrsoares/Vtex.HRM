@@ -15,8 +15,7 @@ namespace Vtex.HRM.Web
                     bootstrap = "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js",
                     underscore = "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"
                 };
-
-
+            
             bundles.Add(new ScriptBundle("~/bundles/jquery", cdn.jquery)
                 .Include("~/Scripts/jquery-{version}.js"));
 
@@ -49,8 +48,7 @@ namespace Vtex.HRM.Web
                 .Include("~/App/controllers/checks.js")
                 .Include("~/App/controllers/analysis.js"));
 
-            //BundleTable.EnableOptimizations = true;
-
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
