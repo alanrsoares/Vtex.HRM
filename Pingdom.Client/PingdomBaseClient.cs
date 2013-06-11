@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Threading.Tasks;
+using System.Web;
 
 namespace Pingdom.Client
 {
@@ -36,54 +37,59 @@ namespace Pingdom.Client
         }
 
         #region Rest Methods
-        
-        public JsonStringResult Get(string apiMethod)
+
+        public async Task<JsonStringResult> Get(string apiMethod)
         {
-            return new JsonStringResult(_baseClient.GetStringAsync(apiMethod).Result);
+            var result = await _baseClient.GetStringAsync(apiMethod);
+
+            return new JsonStringResult(result);
         }
 
-        public JsonStringResult Post(string apiMethod, object data)
+        public async Task<JsonStringResult> PostAsync(string apiMethod, object data)
         {
-            var response = _baseClient.PostAsJsonAsync(apiMethod, data);
-            var responseContent = response.Result.Content;
-            var contentString = responseContent.ReadAsStringAsync().Result;
+            var response = await _baseClient.PostAsJsonAsync(apiMethod, data);
+            var responseContent = response.Content;
+            var contentString = await responseContent.ReadAsStringAsync();
 
             return new JsonStringResult(contentString);
         }
 
-        public JsonStringResult Put(string apiMethod, object data)
+        public async Task<JsonStringResult> PutAsync(string apiMethod, object data)
         {
-            return new JsonStringResult(UploadString(apiMethod, data, HttpMethod.Put));
+            var response = await SendAsync(apiMethod, data, HttpMethod.Put);
+            return new JsonStringResult(response);
         }
 
-        public JsonStringResult Delete(string apiMethod)
+        public async Task<JsonStringResult> DeleteAsync(string apiMethod)
         {
-            return new JsonStringResult(UploadString(apiMethod, HttpMethod.Delete));
+            var response = await SendAsync(apiMethod, HttpMethod.Delete);
+            return new JsonStringResult(response);
         }
 
-        public JsonStringResult Delete(string apiMethod, object data)
+        public async Task<JsonStringResult> DeleteAsync(string apiMethod, object data)
         {
-            return new JsonStringResult(UploadString(apiMethod, data, HttpMethod.Delete));
+            var response = await SendAsync(apiMethod, data, HttpMethod.Delete);
+            return new JsonStringResult(response);
         }
 
         #endregion
 
         #region Private Methods
 
-        private dynamic UploadString(string apiMethod, HttpMethod httpMethod)
+        private async Task<dynamic> SendAsync(string apiMethod, HttpMethod httpMethod)
         {
-            return UploadString(apiMethod, null, httpMethod);
+            return await SendAsync(apiMethod, null, httpMethod);
         }
 
-        private dynamic UploadString(string apiMethod, object data, HttpMethod httpMethod)
+        private async Task<dynamic> SendAsync(string apiMethod, object data, HttpMethod httpMethod)
         {
             var request = new HttpRequestMessage(httpMethod, apiMethod);
 
             if (data != null) request.Content = GetFormUrlEncodedContent(data);
 
-            var response = _baseClient.SendAsync(request);
+            var response = await _baseClient.SendAsync(request);
 
-            return response.Result.Content.ReadAsStringAsync();
+            return response.Content.ReadAsStringAsync();
         }
 
         private static FormUrlEncodedContent GetFormUrlEncodedContent(object anonymousObject)

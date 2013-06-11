@@ -11,10 +11,11 @@
     <div id="checksDetailContainer" ng-show="check">
         <div class="page-header">
             <h1>{{check.name}} - Detalhe
-           
+               
                 <small>
                     <a href="/api/checks/{{check.id}}" target="_blank">/api/checks/{{check.id}}</a>
-                </small></h1>
+                </small>
+            </h1>
         </div>
 
         <div class="well">
@@ -38,10 +39,9 @@
                 </li>
             </ul>
         </div>
-
-        <analysis-detail analysis-detail="analysisDetail" probes="probes" analysis-id="analysisId" />
-
+        
     </div>
 
+    <analysis-detail analysis-detail="analysisDetail" probes="probes" analysis-id="analysisId" />
 
 </section>

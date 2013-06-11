@@ -1,10 +1,12 @@
-﻿namespace Pingdom.Client.Controllers
+﻿using System.Threading.Tasks;
+
+namespace Pingdom.Client.Controllers
 {
     public class ContactsController : ResourceController
     {
-        public JsonStringResult GetContactsList()
+        public async Task<JsonStringResult> GetContactsList()
         {
-            return Client.Get("contacts/");
+            return await Client.Get("contacts/");
         }
     }
 }

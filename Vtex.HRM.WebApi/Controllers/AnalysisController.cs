@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using Pingdom.Client;
 using WebAPI.OutputCache;
 
@@ -10,18 +11,20 @@ namespace Vtex.HRM.WebApi.Controllers
 
         // GET api/analysis/9
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
-        public dynamic Get(int id)
+        public async Task<dynamic> Get(int id)
         {
             var checkId = id;
-            return _resource.GetRootCauseAnalysisResultsList(checkId).ToDynamicObject();
+            var result = await _resource.GetRootCauseAnalysisResultsList(checkId);
+            return result.ToDynamicObject();
         }
 
         // GET api/analysis/5/6
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
-        public dynamic Get(int id, int analysisId)
+        public async Task<dynamic> Get(int id, int analysisId)
         {
             var checkId = id;
-            return _resource.GetRawAnalysisResults(checkId, analysisId).ToDynamicObject();
+            var result = await _resource.GetRawAnalysisResults(checkId, analysisId);
+            return result.ToDynamicObject();
         }
 
         // POST api/checks

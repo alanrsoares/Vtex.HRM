@@ -1,4 +1,5 @@
-﻿using Vtex.HRM.WebApi.Contracts.Checks;
+﻿using System.Threading.Tasks;
+using Vtex.HRM.WebApi.Contracts.Checks;
 using System.Web.Http;
 using Pingdom.Client;
 using WebAPI.OutputCache;
@@ -11,22 +12,25 @@ namespace Vtex.HRM.WebApi.Controllers
 
         // GET api/checks
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
-        public dynamic Get()
+        public async Task<dynamic> Get()
         {
-            return _resource.GetChecksList().ToDynamicObject();
+            var result = await _resource.GetChecksList();
+            return result.ToDynamicObject();
         }
 
         // GET api/checks/5
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
-        public dynamic Get(int id)
+        public async Task<dynamic> Get(int id)
         {
-            return _resource.GetDetailedCheckInformation(id).ToDynamicObject();
+            var result = await _resource.GetDetailedCheckInformation(id);
+            return result.ToDynamicObject();
         }
 
         // POST api/checks
-        public dynamic Post([FromBody]object check)
+        public async Task<dynamic> Post([FromBody]object check)
         {
-            return _resource.CreateNewCheck(check).ToDynamicObject();
+            var result = await _resource.CreateNewCheck(check);
+            return result.ToDynamicObject();
         }
 
         // PUT api/checks/5
@@ -38,7 +42,7 @@ namespace Vtex.HRM.WebApi.Controllers
         // PUT api/checks/5
         public dynamic Put([FromBody]ModifyMultipleChecksRequest request)
         {
-           return request;//_resource.ModifyMultipleChecks(request);
+            return request;//_resource.ModifyMultipleChecks(request);
         }
 
         // DELETE api/checks/5

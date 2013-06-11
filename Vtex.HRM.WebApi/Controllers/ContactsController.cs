@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using Pingdom.Client;
 
 namespace Vtex.HRM.WebApi.Controllers
@@ -8,9 +9,10 @@ namespace Vtex.HRM.WebApi.Controllers
         private readonly Pingdom.Client.Controllers.ContactsController _resource = Resources.Contacts;
 
         // GET api/contacts
-        public dynamic Get()
+        public async Task<dynamic> Get()
         {
-            return _resource.GetContactsList().ToDynamicObject();
+            var result = await _resource.GetContactsList();
+            return result.ToDynamicObject();
         }
     }
 }

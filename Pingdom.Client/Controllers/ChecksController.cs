@@ -1,42 +1,44 @@
-﻿namespace Pingdom.Client.Controllers
+﻿using System.Threading.Tasks;
+
+namespace Pingdom.Client.Controllers
 {
     using System.Collections.Generic;
 
     public sealed class ChecksController : ResourceController
     {
-        public JsonStringResult GetChecksList()
+        public async Task<JsonStringResult> GetChecksList()
         {
-            return Client.Get("checks/");
+            return await Client.GetAsync("checks/");
         }
 
-        public JsonStringResult GetDetailedCheckInformation(int checkId)
+        public Task<JsonStringResult> GetDetailedCheckInformation(int checkId)
         {
-            return Client.Get(string.Format("checks/{0}", checkId));
+            return Client.GetAsync(string.Format("checks/{0}", checkId));
         }
 
-        public JsonStringResult CreateNewCheck(object check)
+        public async Task<JsonStringResult> CreateNewCheck(object check)
         {
-            return Client.Post("checks/", check);
+            return await Client.PostAsync("checks/", check);
         }
 
-        public JsonStringResult ModifyCheck(int checkId, object check)
+        public async Task<JsonStringResult> ModifyCheck(int checkId, object check)
         {
-            return Client.Put(string.Format("checks/{0}", checkId), check);
+            return await Client.PutAsync(string.Format("checks/{0}", checkId), check);
         }
 
-        public JsonStringResult ModifyMultipleChecks(object modifyMultipleChecksRequest)
+        public async Task<JsonStringResult> ModifyMultipleChecks(object modifyMultipleChecksRequest)
         {
-            return Client.Put("checks/", modifyMultipleChecksRequest);
+            return await Client.PutAsync("checks/", modifyMultipleChecksRequest);
         }
 
-        public JsonStringResult DeleteCheck(int checkId)
+        public Task<JsonStringResult> DeleteCheck(int checkId)
         {
-            return Client.Delete(string.Format("checks/{0}", checkId));
+            return Client.DeleteAsync(string.Format("checks/{0}", checkId));
         }
 
-        public JsonStringResult DeleteMultipleChecks(IEnumerable<int> checkIds)
+        public async Task<JsonStringResult> DeleteMultipleChecks(IEnumerable<int> checkIds)
         {
-            return Client.Delete("checks/", new { checkIds = string.Join(",", checkIds) });
+            return await Client.DeleteAsync("checks/", new { checkIds = string.Join(",", checkIds) });
         }
     }
 }

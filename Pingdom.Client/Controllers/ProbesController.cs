@@ -1,10 +1,12 @@
-﻿namespace Pingdom.Client.Controllers
+﻿using System.Threading.Tasks;
+
+namespace Pingdom.Client.Controllers
 {
     public class ProbesController : ResourceController
     {
-        public JsonStringResult GetProbeServerList()
+        public async Task<JsonStringResult> GetProbeServerList()
         {
-            return Client.Get("probes/");
+            return await Client.Get("probes/");
         }
     }
 }
