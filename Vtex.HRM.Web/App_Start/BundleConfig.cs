@@ -15,6 +15,7 @@ namespace Vtex.HRM.Web
                     angularStrap = "//cdnjs.cloudflare.com/ajax/libs/angular-strap/0.7.4/angular-strap.min.js",
                     bootstrap = "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js",
                     underscore = "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js",
+                    moment = "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"
                 };
 
             bundles.Add(new ScriptBundle("~/bundles/jquery", cdn.jquery)
@@ -34,6 +35,9 @@ namespace Vtex.HRM.Web
 
             bundles.Add(new ScriptBundle("~/bundles/underscore", cdn.underscore)
                 .Include("~/Scripts/underscore.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/moment", cdn.moment)
+                .Include("~/Scripts/moment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/json")
                 .Include("~/Scripts/json2.js",
