@@ -61,20 +61,14 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-    @Scripts.Render(
-    "~/bundles/jquery",
-    "~/bundles/json",
-    "~/bundles/angular",
-    "~/bundles/bootstrap",
-    "~/bundles/underscore",
-    "~/Scripts/moment.min.js",
-    "~/App/app.js",
-    "~/bundles/services",
-    "~/bundles/directives",
-    "~/bundles/filters",
-    "~/bundles/controllers")
-
-    @RenderSection("scripts", false)
-
+    @Scripts.Render("~/bundles/jquery",
+                    "~/bundles/angular",
+                    "~/bundles/angular-extras",
+                    "~/bundles/angular-strap",
+                    "~/bundles/bootstrap",
+                    "~/bundles/underscore",
+                    "~/Scripts/moment.min.js",
+                    "~/bundles/json",
+                    "~/bundles/app")
 </body>
 </html>
