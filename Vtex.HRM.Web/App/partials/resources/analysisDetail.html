@@ -3,23 +3,22 @@
         <li><a href="#/">Home</a> <span class="divider">/</span></li>
         <li><a href="#/resources">Resources</a> <span class="divider">/</span></li>
         <li><a href="#/checks">Analysis</a> <span class="divider">/</span></li>
-        <li class="active">{{check.id}}</li>
+        <li class="active">{{check.name}}</li>
     </ul>
 
     <div ng-show="!analysisId && !analysisHistory" class="alert alert-info">
-        Carregando histórico de análises...
+        Carregando histórico de análises para {{check.name}}...
    
     </div>
 
     <div id="analysisHistoryContainer" ng-show="analysisHistory">
 
         <div class="page-header">
-            <h1>Histórico de Análises</h1>
-            <small></small>
+            <h1>Histórico de Análises <small>// {{check.name}}</small></h1>
         </div>
 
         <div class="btn-group pull-right">
-            <a class="btn" href="/api/analysis/{{checkId}}">{ json : source }</a>
+            <a class="btn" href="/api/analysis/{{check.id}}">{ json : source }</a>
         </div>
 
         <table class="table table-hover table-striped">
@@ -32,18 +31,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="analysis in analysisHistory">
+                <tr ng-repeat="analysis in analysisHistory" ng-click="goToDetail(analysis)" style="cursor: pointer">
                     <td class="hidden-phone">{{analysis.id}}</td>
                     <td>{{analysis.timefirsttest | unixDate}} </td>
                     <td>{{analysis.timeconfirmtest | unixDate}} </td>
                     <td>
-                        <a class="btn" href="#/resources/analysis/{{checkId}}/?analysisId={{analysis.id}}" title="visualizar detalhes da análise"><span class="hidden-phone">detalhe</span> <i class='icon-search'></i></a>
+                        <a class="btn" href="#/resources/analysis/{{check.id}}/?analysisId={{analysis.id}}" title="visualizar detalhes da análise">
+                            <span class="hidden-phone">detalhe</span> <i class='icon-search'></i>
+                        </a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <analysis-detail analysis-detail="analysisDetail" probes="probes" analysis-id="analysisId" />
+    <analysis-detail analysis-detail="analysisDetail" probes="probes" analysis-id="analysisId" check="check" />
 
 </section>

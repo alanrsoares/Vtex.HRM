@@ -25,17 +25,22 @@ var hrmDirectives = angular.module('hrm.directives', [])
             scope: {
                 analysisDetail: "=",
                 analysisId: "=",
-                probes: "="
+                probes: "=",
+                check: "="
             },
             link: function (scope, element, attributes) {
-                
-                scope.taskCommunicationLog = function (task) {
+
+                scope.communicationLog = function (task) {
 
                     var communicationLogs = _.findWhere(task.result, { name: 'communication_log' });
 
                     if (communicationLogs) return communicationLogs.value[0];
 
                     return false;
+                };
+
+                scope.probe = function (task) {
+                    return _.findWhere(scope.probes, { 'id': parseInt(task.analyzer_id) });
                 };
             }
         };

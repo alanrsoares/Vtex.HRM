@@ -2,19 +2,15 @@
     <ul class="breadcrumb">
         <li><a href="#/">Home</a> <span class="divider">/</span></li>
         <li><a href="#/resources">Resources</a> <span class="divider">/</span></li>
-        <li><a href="#/checks">Checks</a> <span class="divider">/</span></li>
-        <li class="active">{{check.id}}</li>
+        <li><a href="#/resources/checks">Checks</a> <span class="divider">/</span></li>
+        <li class="active">{{check.name}}</li>
     </ul>
 
     <div class="alert alert-info" ng-show="!check">Carregando check...</div>
 
     <div id="checksDetailContainer" ng-show="check">
         <div class="page-header">
-            <h1>{{check.name}} - Detalhe
-               
-                <small>
-                    <a href="/api/checks/{{check.id}}" target="_blank">/api/checks/{{check.id}}</a>
-                </small>
+            <h1>{{check.name}} <small></small>
             </h1>
         </div>
 
@@ -39,9 +35,9 @@
                 </li>
             </ul>
         </div>
-        
+
     </div>
 
-    <analysis-detail analysis-detail="analysisDetail" probes="probes" analysis-id="analysisId" />
+    <analysis-detail analysis-detail="analysisDetail" probes="probes" analysis-id="analysisId" check="check" />
 
 </section>

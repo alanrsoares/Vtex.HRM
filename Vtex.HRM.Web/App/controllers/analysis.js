@@ -1,13 +1,15 @@
 ﻿'use strict';
 
-hrm.controller('AnalysisDetailCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'analysis', 'probes',
-        function ($scope, $rootScope, $routeParams, $location, analysis, probes) {
+hrm.controller('AnalysisDetailCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'analysis', 'probes', 'checks',
+        function ($scope, $rootScope, $routeParams, $location, analysis, probes, checks) {
 
-            $scope.checkId = $routeParams.id;
+            $scope.analysisId = $location.search().analysisId;
 
-            $scope.analysisId = $location.search()['analysisId'];
+            var checkId = $routeParams.id;
 
-            if (!$scope.checkId) return false;
+            checks.get({ 'checkId': checkId }, function (data) {
+                $scope.check = data.check;
+            });
 
             probes.get(function (data) {
                 $scope.probes = data.probes;
@@ -15,16 +17,21 @@ hrm.controller('AnalysisDetailCtrl', ['$scope', '$rootScope', '$routeParams', '$
 
             if ($scope.analysisId) {
                 //analysis detail
-                analysis.get({ checkId: $scope.checkId, analysisId: $scope.analysisId }, function (data) {
+                analysis.get({ 'checkId': checkId, analysisId: $scope.analysisId }, function (data) {
                     $scope.analysisDetail = data;
                 });
             } else {
                 //analysis history
-                analysis.get({ checkId: $scope.checkId }, function (data) {
+                analysis.get({ 'checkId': checkId }, function (data) {
                     $scope.analysisHistory = data.analysis;
 
                 });
             }
+
+            $scope.goToDetail = function (a) {
+                $location.path("/resources/analysis/" + checkId + "/")
+                         .search('analysisId', a.id);
+            };
 
             return false;
         }]);

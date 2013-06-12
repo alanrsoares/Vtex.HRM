@@ -7,9 +7,7 @@
     <div ng-show="analysisDetail">
 
         <div class="page-header">
-            <h1>Análise - Detalhe
-               
-                <small></small>
+            <h1>Análise <small>// {{check.name}}</small>
             </h1>
         </div>
         <div class="btn-group pull-right">
@@ -39,7 +37,8 @@
         <div class="well" style="background: white">
             <ul class="nav nav-tabs" id="checkTabsList">
                 <li ng-repeat="task in analysisDetail.analysisresult.tasks" ng-class="{active:task==analysisDetail.analysisresult.tasks[0]}">
-                    <a showtab href="#task-{{task.analyzer_id}}">{{(probes | filter:{id : task.analyzer_id})[0].name }}
+                    <a showtab href="#task-{{task.analyzer_id}}">
+                        <img ng-src="https://my.pingdom.com/images/flags/{{probe(task).countryiso.toLowerCase()}}.png" alt="{{probe(task).name}}" /> - {{probe(task).name}}
                     </a>
                 </li>
             </ul>
@@ -76,7 +75,7 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="request-{{task.analyzer_id}}">
-                                    <pre>{{taskCommunicationLog(task).request}}</pre>
+                                    <pre>{{communicationLog(task).request}}</pre>
                                 </div>
                                 <div class="tab-pane" id="headers-{{task.analyzer_id}}">
                                     <pre><ul><li ng-repeat="header in taskCommunicationLog(task).response_headers"><strong>{{header.name}}</strong>: {{header.value}}</li></ul></pre>
