@@ -38,7 +38,7 @@
             <ul class="nav nav-tabs" id="checkTabsList">
                 <li ng-repeat="task in analysisDetail.analysisresult.tasks" ng-class="{active:task==analysisDetail.analysisresult.tasks[0]}">
                     <a showtab href="#task-{{task.analyzer_id}}">
-                        <img ng-src="https://my.pingdom.com/images/flags/{{probe(task).countryiso.toLowerCase()}}.png" alt="{{probe(task).name}}" /> - {{probe(task).name}}
+                        <img ng-src="https://my.pingdom.com/images/flags/{{probe(task).countryiso.toLowerCase()}}.png" alt="{{probe(task).name}}" /> {{probe(task).name}}
                     </a>
                 </li>
             </ul>
