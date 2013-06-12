@@ -199,6 +199,8 @@ hrm.controller('ChecksCtrl', ['$scope', '$rootScope', '$location', 'checks',
 
                 $rootScope.pageTitle = data.check.name;
 
+                $scope.statusIcon = "/Content/images/status-" + data.check.status + ".png";
+
                 $scope.check = data.check;
 
                 // if check is down, then get analysis report
@@ -208,13 +210,13 @@ hrm.controller('ChecksCtrl', ['$scope', '$rootScope', '$location', 'checks',
                         if (analysisResult && analysisResult.analysis.length > 0) {
 
                             $scope.analysisResult = analysisResult.analysis;
-                            
+
                             $scope.analysisId = $scope.analysisResult[0].id;
-                            
+
                             analysis.get({ checkId: $scope.check.id, analysisId: $scope.analysisId }, function (analysisDetail) {
-                                
+
                                 $scope.analysisDetail = analysisDetail;
-                                
+
                                 var analysisTaskResult = $scope.analysisDetail.analysisresult.tasks[0].result;
 
                                 var rawResponse = _.findWhere(analysisTaskResult, { name: "raw_response" });
