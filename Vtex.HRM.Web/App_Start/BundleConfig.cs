@@ -9,40 +9,54 @@ namespace Vtex.HRM.Web
         {
             var cdn = new
                 {
-                    jquery = "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js",
-                    angular = "//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js",
-                    angularStrap = "//cdnjs.cloudflare.com/ajax/libs/angular-strap/0.7.4/angular-strap.min.js",
-                    bootstrap = "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js",
-                    underscore = "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js",
-                    moment = "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"
+                    scripts = new
+                    {
+                        jquery = "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js",
+                        angular = "//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js",
+                        angularStrap = "//cdnjs.cloudflare.com/ajax/libs/angular-strap/0.7.4/angular-strap.min.js",
+                        bootstrap = "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js",
+                        underscore = "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js",
+                        moment = "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js",
+                        json2 = "//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"
+                    },
+                    styles = new
+                        {
+                            bootstrapCombined = "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
+                        }
                 };
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery", cdn.jquery)
+            bundles.Add(new StyleBundle("~/bundles/css/bootstrap-combined", cdn.styles.bootstrapCombined)
+                .Include("~/Content/bootstrap.css",
+                         "~/Content/bootstrap-responsive.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/js/jquery", cdn.scripts.jquery)
                 .Include("~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angular", cdn.angular)
+            bundles.Add(new ScriptBundle("~/bundles/js/angular", cdn.scripts.angular)
                 .Include("~/Scripts/angular.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angular-extras")
+            bundles.Add(new ScriptBundle("~/bundles/js/angular-extras")
                 .Include("~/Scripts/angular-resource.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angular-strap", cdn.angularStrap)
+            bundles.Add(new ScriptBundle("~/bundles/js/angular-strap", cdn.scripts.angularStrap)
                 .Include("~/Scripts/angular-strap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap", cdn.bootstrap)
+            bundles.Add(new ScriptBundle("~/bundles/js/bootstrap", cdn.scripts.bootstrap)
                 .Include("~/Scripts/bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/underscore", cdn.underscore)
+            bundles.Add(new ScriptBundle("~/bundles/js/underscore", cdn.scripts.underscore)
                 .Include("~/Scripts/underscore.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/moment", cdn.moment)
+            bundles.Add(new ScriptBundle("~/bundles/js/moment", cdn.scripts.moment)
                 .Include("~/Scripts/moment.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/json")
-                .Include("~/Scripts/json2.js",
-                        "~/Scripts/jsonlint.js"));
+            bundles.Add(new ScriptBundle("~/bundles/js/json2", cdn.scripts.json2)
+                .Include("~/Scripts/json2.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/app")
+            bundles.Add(new ScriptBundle("~/bundles/js/jsonlint")
+                .Include("~/Scripts/jsonlint.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/js/app")
                 // App
                 .Include("~/App/app.js")
                 // Services
