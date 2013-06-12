@@ -43,5 +43,13 @@
                 return new ProbesController();
             }
         }
+
+        public static TraceRouteController TraceRoute
+        {
+            get
+            {
+                return new TraceRouteController();
+            }
+        }
     }
 }

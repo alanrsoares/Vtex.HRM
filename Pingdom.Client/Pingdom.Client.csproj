@@ -62,6 +62,7 @@
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\ChecksController.cs" />
     <Compile Include="Controllers\ProbesController.cs" />
+    <Compile Include="Controllers\TraceRouteController.cs" />
     <Compile Include="PingdomBaseClient.cs" />
     <Compile Include="PingdomClient.cs" />
     <Compile Include="JsonStringResult.cs" />
