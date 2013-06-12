@@ -201,9 +201,7 @@ hrm.controller('ChecksCtrl', ['$scope', '$rootScope', '$location', 'checks',
 
                 $scope.check = data.check;
 
-                $scope.statusIcon = "Content/images/status-" + $scope.check.status + ".png";
-
-                // if check is down, then get analysis
+                // if check is down, then get analysis report
                 if ($scope.check) {
                     analysis.get({ checkId: $scope.check.id }, function (analysisResult) {
 
