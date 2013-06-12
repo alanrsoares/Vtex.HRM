@@ -25,7 +25,7 @@ namespace Vtex.HRM.Web
                         }
                 };
 
-            bundles.Add(new StyleBundle("~/bundles/css/bootstrap-combined", cdn.styles.bootstrapCombined)
+            bundles.Add(new StyleBundle("~/Content/bootstrap-combined", cdn.styles.bootstrapCombined)
                 .Include("~/Content/bootstrap.css",
                          "~/Content/bootstrap-responsive.css"));
 
