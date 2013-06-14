@@ -6,7 +6,9 @@
         <li class="active">{{check.name}}</li>
     </ul>
 
-    <div class="alert alert-info" ng-show="!check">Carregando check...</div>
+    <div class="alert alert-info" ng-show="!check">
+        <i class="icon-spinner icon-spin"></i> Carregando check...
+    </div>
 
     <div id="checksDetailContainer" ng-show="check">
         <div class="page-header">

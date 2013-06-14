@@ -44,4 +44,22 @@ var hrmDirectives = angular.module('hrm.directives', [])
                 };
             }
         };
+    })
+    .directive('backToTop', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            template: "<a class='btn btn-info pull-right' style='border-top-right-radius: 0; border-top-left-radius: 0;'>" +
+                      "<b>{{text}}</b> <i class='icon-chevron-up icon-white'></i>" +
+                      "</a>",
+            scope: {
+                text: "@",
+                show: "&"
+            },
+            link: function (scope, element, attributes) {
+                element.on('click', function () {
+                    window.scrollTo();
+                });
+            }
+        };
     });

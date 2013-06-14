@@ -9,21 +9,22 @@
         <h1>Checks <small><a href="/api/checks" target="_blank">/api/checks</a></small></h1>
     </div>
 
-    <span ng-show="!all">Loading checks...</span>
+    <div ng-show="!all" class="alert alert-info">
+        <i class="icon-spinner icon-spin"></i>
+        Carregando checks...
+    </div>
 
     <div id="checkTabs" ng-show="all">
 
-        <ul class="nav nav-tabs" id="checkTabsList">
-
+        <ul class="nav nav-tabs detail-tabs" id="checkTabsList">
             <li ng-repeat="tab in tabs | orderBy:'position'" ng-class="{active: tab.active}">
                 <a showtab href="#filtered" ng-click="paneOptions(tab)">
                     <span class="badge {{tab.badgeStyle}}">{{tab.checks.length}}</span> {{tab.label}}
                 </a>
             </li>
-
         </ul>
 
-        <div class="tab-content">
+        <div class="tab-content detail">
 
             <div class="tab-pane active" id="filtered">
                 <p>
@@ -78,6 +79,9 @@
                 </p>
             </div>
 
+        </div>
+        <div ng-show="(paneOptions().filtered | filter:query).length>=6">
+            <back-to-top text="voltar ao topo"/>    
         </div>
     </div>
 

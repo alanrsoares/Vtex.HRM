@@ -6,6 +6,17 @@
     background: url("/Content/images/hrm-icon.png") no-repeat top 4px left 1px;
 }
 
+.detail {
+    border-width: 0 1px 1px;
+    border-style: solid;
+    border-color: #DDD;
+    padding: 20px;
+}
+
+.detail-tabs {
+    margin-bottom: 0;
+}
+
 .background-white {
     background: white;
 }

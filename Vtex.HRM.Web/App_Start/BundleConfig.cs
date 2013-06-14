@@ -21,13 +21,17 @@ namespace Vtex.HRM.Web
                     },
                     styles = new
                         {
-                            bootstrapCombined = "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
+                            bootstrapCombined = "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css",
+                            fontAwesome = "//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css"
                         }
                 };
 
             bundles.Add(new StyleBundle("~/Content/bootstrap-combined", cdn.styles.bootstrapCombined)
                 .Include("~/Content/bootstrap.css",
                          "~/Content/bootstrap-responsive.css"));
+
+            bundles.Add(new StyleBundle("~/Content/font-awesome", cdn.styles.fontAwesome)
+                .Include("~/Content/font-awesome.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/jquery", cdn.scripts.jquery)
                 .Include("~/Scripts/jquery-{version}.js"));

@@ -7,8 +7,7 @@
     </ul>
 
     <div ng-show="!analysisId && !analysisHistory" class="alert alert-info">
-        Carregando histórico de análises para {{check.name}}...
-   
+        <i class="icon-spinner icon-spin"></i> Carregando histórico de análises para {{check.name}}...
     </div>
 
     <div id="analysisHistoryContainer" ng-show="analysisHistory">
