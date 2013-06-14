@@ -15,25 +15,26 @@
         </div>
 
         <div class="well" ng-show="check">
-            <ul>
-                <li>
-                    <strong>Nome</strong>: {{check.name}}
-                </li>
-                <li>
-                    <strong>Url monitorada</strong>: <a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a>
-                </li>
-                <li>
-                    <strong>Status</strong>:
-                   
-                    <img ng-src="{{statusIcon}}" alt="{{check.status}}" />
-                </li>
-                <li>
-                    <strong>Criado em</strong>: {{check.created | unixDate}}
-                </li>
-                <li ng-show="check.lasterrortime">
-                    <strong>Último erro capturado em</strong>: {{check.lasterrortime | unixDate}}
-                </li>
-            </ul>
+            <div class="row-fluid">
+                <strong class="span3">Nome</strong>
+                <span class="span9">{{check.name}}</span>
+            </div>
+            <div class="row-fluid">
+                <strong class="span3">Url monitorada</strong>
+                <span class="span9"><a href="{{'http://' + check.hostname + check.type.http.url}}">{{check.hostname + check.type.http.url}}</a></span>
+            </div>
+            <div class="row-fluid">
+                <strong class="span3">Status</strong>
+                <span class="span9"><img ng-src="{{statusIcon}}" alt="{{check.status}}" /></span>
+            </div>
+            <div class="row-fluid">
+                <strong class="span3">Criado em</strong>
+                <span class="span9">{{check.created | unixDate}}</span>
+            </div>
+            <div class="row-fluid" ng-show="check.lasterrortime">
+                <strong class="span3">Último erro capturado em</strong>
+                <span class="span9">{{check.lasterrortime | unixDate}}</span>
+            </div>
         </div>
 
     </div>

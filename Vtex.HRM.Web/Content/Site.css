@@ -6,14 +6,16 @@
     background: url("/Content/images/hrm-icon.png") no-repeat top 4px left 1px;
 }
 
+.background-white {
+    background: white;
+}
+
 @media(max-width: 980px) {
-    body {
-        padding-top: 0; 
-    }
+    body{ padding-top: 0; }
 }
 
 @media (max-width: 480px) {
     .nav-tabs > li {
-        float:none;
+        float: none;
     }
 }

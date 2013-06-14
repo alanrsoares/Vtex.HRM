@@ -17,28 +17,29 @@
 
         <div class="clearfix"></div>
 
-        <div class="well" style="background: white; border-top-right-radius: 0">
+        <div class="well background-white" style="border-top-right-radius: 0">
             <div class="row-fluid">
                 <div class="span6 well">
                     <b>Status</b>:
-                    <pre style="background: white">{{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}</pre>
+                    <pre class="background-white">{{analysisDetail.firststatusdesc}} - {{analysisDetail.firststatusdesclong}}</pre>
                     <b>Status de Confirmação</b>:
-                    <pre style="background: white">{{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}</pre>
+                    <pre class="background-white">{{analysisDetail.confirmstatusdesc}} - {{analysisDetail.confirmstatusdesclong}}</pre>
                 </div>
                 <div class="span6 well">
                     <b>Tipo</b>:
-                    <pre style="background: white">{{analysisDetail.analysisresult.analysis_type}}</pre>
+                    <pre class="background-white">{{analysisDetail.analysisresult.analysis_type}}</pre>
                     <b>Disparado em</b>:
-                    <pre style="background: white">{{analysisDetail.analysisresult.time_triggered | unixDate}}</pre>
+                    <pre class="background-white">{{analysisDetail.analysisresult.time_triggered | unixDate}}</pre>
                 </div>
             </div>
         </div>
 
-        <div class="well" style="background: white">
+        <div class="well background-white">
             <ul class="nav nav-tabs" id="checkTabsList">
                 <li ng-repeat="task in analysisDetail.analysisresult.tasks" ng-class="{active:task==analysisDetail.analysisresult.tasks[0]}">
                     <a showtab href="#task-{{task.analyzer_id}}">
-                        <img ng-src="https://my.pingdom.com/images/flags/{{probe(task).countryiso.toLowerCase()}}.png" alt="{{probe(task).name}}" /> {{probe(task).name}}
+                        <img ng-src="https://my.pingdom.com/images/flags/{{probe(task).countryiso.toLowerCase()}}.png" alt="{{probe(task).name}}" />
+                        {{probe(task).name}}
                     </a>
                 </li>
             </ul>
@@ -48,15 +49,15 @@
                         <div class="row-fluid">
                             <div class="span6 well">
                                 <b>Análise iniciada em </b>
-                                <pre style="background: white">{{task.time_start | unixDate}}</pre>
+                                <pre class="background-white">{{task.time_start | unixDate}}</pre>
                                 <b>Fim</b>:
-                                <pre style="background: white">{{task.time_end | unixDate}}</pre>
+                                <pre class="background-white">{{task.time_end | unixDate}}</pre>
                             </div>
                             <div class="span6 well">
                                 <b>Status</b>:
-                                <pre style="background: white">{{task.status}}</pre>
+                                <pre class="background-white">{{task.status}}</pre>
                                 <b>Mensagem</b>:
-                                <pre style="background: white">{{(task.result | filter:{name:'message'})[0].value}}</pre>
+                                <pre class="background-white">{{(task.result | filter:{name:'message'})[0].value}}</pre>
                             </div>
                         </div>
                     </p>
