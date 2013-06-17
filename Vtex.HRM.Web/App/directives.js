@@ -45,11 +45,11 @@ var hrmDirectives = angular.module('hrm.directives', [])
             }
         };
     })
-    .directive('backToTop', function () {
+    .directive('backToTop', ['$window', function ($window) {
         return {
             restrict: 'E',
-            replace: true,
-            template: "<a class='btn btn-info pull-right' style='border-top-right-radius: 0; border-top-left-radius: 0;'>" +
+            replace: false,
+            template: "<a class='btn btn-info pull-right btn-back-to-top'>" +
                       "<b>{{text}}</b> <i class='icon-chevron-up icon-white'></i>" +
                       "</a>",
             scope: {
@@ -57,9 +57,28 @@ var hrmDirectives = angular.module('hrm.directives', [])
                 show: "&"
             },
             link: function (scope, element, attributes) {
+
                 element.on('click', function () {
                     window.scrollTo();
                 });
+                
+                var body = angular.element('body');
+
+                //$(document).ready(function () {
+                //    console.log(this);
+                //    var bodyScrollHeight = body.get(0).scrollHeight;
+                //    var buttonPosition = $(element).offset().top;
+                    
+                //    console.log(bodyScrollHeight);
+                //    console.log(buttonPosition);
+
+                //    if (buttonPosition > bodyScrollHeight) {
+                //        $(element).show();
+                //    } else {
+                //        $(element).hide();
+                //    }
+                //});
+
             }
         };
-    });
+    }]);
