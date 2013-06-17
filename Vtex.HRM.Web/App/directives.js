@@ -62,7 +62,7 @@ var hrmDirectives = angular.module('hrm.directives', [])
                     window.scrollTo();
                 });
                 
-                var body = angular.element('body');
+                //var body = angular.element('body');
 
                 //$(document).ready(function () {
                 //    console.log(this);

@@ -1,10 +1,10 @@
 ﻿body {
     padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-    background: #efefef
+    background: #efefef;
 }
 
-.navbar-inner .container {
-    background: url("/Content/images/hrm-icon.png") no-repeat top 4px left 1px;
+.brand{
+    background: url("/Content/images/hrm-icon.png") no-repeat top 4px left 20px;
 }
 
 .detail {
@@ -12,19 +12,25 @@
     border-style: solid;
     border-color: #DDD;
     padding: 20px;
-    background: #ffffff
+    background: #ffffff;
 }
+    .detail.inverse {
+        background: #f5f5f5;
+    }
 
 .detail-tabs {
     margin-bottom: 0;
 }
+    .detail-tabs.inverse > li.active > a {
+        background: #f5f5f5;
+    }
 
 .background-white {
     background: #ffffff;
 }
 
 .btn-back-to-top {
-    border-top-right-radius: 0; 
+    border-top-right-radius: 0;
     border-top-left-radius: 0;
 }
 

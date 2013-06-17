@@ -62,7 +62,7 @@
                 </p>
                 <p>
                     <div ng-show="communicationLog(task)">
-                        <ul class="nav nav-tabs detail-tabs">
+                        <ul class="nav nav-tabs detail-tabs inverse">
                             <li class="active">
                                 <a showtab href="#request-{{task.analyzer_id}}">
                                     <i class="icon-exchange"></i>
@@ -82,15 +82,15 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="tab-content detail">
+                        <div class="tab-content detail inverse">
                             <div class="tab-pane active" id="request-{{task.analyzer_id}}">
-                                <pre>{{communicationLog(task).request}}</pre>
+                                <pre class="background-white">{{communicationLog(task).request}}</pre>
                             </div>
                             <div class="tab-pane" id="headers-{{task.analyzer_id}}">
-                                <pre><ul><li ng-repeat="header in communicationLog(task).response_headers"><strong>{{header.name}}</strong>: {{header.value}}</li></ul></pre>
+                                <pre class="background-white"><ul><li ng-repeat="header in communicationLog(task).response_headers"><strong>{{header.name}}</strong>: {{header.value}}</li></ul></pre>
                             </div>
                             <div class="tab-pane" id="content-{{task.analyzer_id}}">
-                                <pre>{{communicationLog(task).response_content | jsonFormatter}}</pre>
+                                <pre class="background-white">{{communicationLog(task).response_content | jsonFormatter}}</pre>
                             </div>
                         </div>
                     </div>
