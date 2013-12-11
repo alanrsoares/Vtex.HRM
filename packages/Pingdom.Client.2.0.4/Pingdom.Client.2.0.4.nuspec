@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Pingdom.Client</id>
+    <version>2.0.4</version>
+    <title>Pingdom C# Client</title>
+    <authors>https://github.com/alanrsoares</authors>
+    <owners>https://github.com/alanrsoares</owners>
+    <projectUrl>https://github.com/alanrsoares/pingdom.client</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>C# TypeSafe Client wrapper for Pingdom APIs v2.0</description>
+    <releaseNotes>First NuGet Release</releaseNotes>
+    <tags>pingdom client typesafe c# restful</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="5.0.8" />
+    </dependencies>
+  </metadata>
+</package>

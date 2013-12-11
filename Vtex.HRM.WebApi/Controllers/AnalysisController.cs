@@ -1,13 +1,14 @@
-﻿using System.Threading.Tasks;
-using System.Web.Http;
-using Pingdom.Client;
-using WebAPI.OutputCache;
-
-namespace Vtex.HRM.WebApi.Controllers
+﻿namespace Vtex.HRM.WebApi.Controllers
 {
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using PingdomClient;
+    using PingdomClient.Resources;
+    using WebAPI.OutputCache;
+
     public class AnalysisController : ApiController
     {
-        private readonly Pingdom.Client.Controllers.AnalysisController _resource = Resources.Analysis;
+        private readonly AnalysisResource _resource = Pingdom.Client.Analysis;
 
         // GET api/analysis/9
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
@@ -15,7 +16,7 @@ namespace Vtex.HRM.WebApi.Controllers
         {
             var checkId = id;
             var result = await _resource.GetRootCauseAnalysisResultsList(checkId);
-            return new JsonStringResult(result).ToDynamicObject();
+            return result;
         }
 
         // GET api/analysis/5/6
@@ -24,7 +25,7 @@ namespace Vtex.HRM.WebApi.Controllers
         {
             var checkId = id;
             var result = await _resource.GetRawAnalysisResults(checkId, analysisId);
-            return new JsonStringResult(result).ToDynamicObject();
+            return result;
         }
 
         // POST api/checks

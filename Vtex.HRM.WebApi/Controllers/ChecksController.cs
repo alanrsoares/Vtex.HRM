@@ -1,46 +1,45 @@
-﻿using System.Threading.Tasks;
-using Vtex.HRM.WebApi.Contracts.Checks;
-using System.Web.Http;
-using Pingdom.Client;
-using WebAPI.OutputCache;
-
-namespace Vtex.HRM.WebApi.Controllers
+﻿namespace Vtex.HRM.WebApi.Controllers
 {
+    using System.Threading.Tasks;
+    using PingdomClient;
+    using PingdomClient.Contracts;
+    using PingdomClient.Resources;
+    using System.Web.Http;
+    using WebAPI.OutputCache;
+
     public class ChecksController : ApiController
     {
-        private readonly Pingdom.Client.Controllers.ChecksController _resource = Resources.Checks;
+        private readonly ChecksResource _resource = Pingdom.Client.Checks;
 
         // GET api/checks
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
-        public async Task<dynamic> Get()
+        public async Task<GetCheckListResponse> Get()
         {
-            var result = await _resource.GetChecksList();
-            return new JsonStringResult(result).ToDynamicObject();
+            var getCheckListResponse = await _resource.GetChecksList();
+            return getCheckListResponse;
         }
 
         // GET api/checks/5
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
-        public async Task<dynamic> Get(int id)
+        public async Task<GetDetailedCheckInformationResponse> Get(int id)
         {
-            var result = await _resource.GetDetailedCheckInformation(id);
-            return new JsonStringResult(result).ToDynamicObject();
+            return await _resource.GetDetailedCheckInformation(id);
         }
 
         // POST api/checks
-        public async Task<dynamic> Post([FromBody]object check)
+        public async Task<PingdomResponse> Post([FromBody]object check)
         {
-            var result = await _resource.CreateNewCheck(check);
-            return new JsonStringResult(result).ToDynamicObject();
+            return await _resource.CreateNewCheck(check);
         }
 
         // PUT api/checks/5
-        public dynamic Put(int checkId, [FromBody]object check)
+        public async Task<PingdomResponse> Put(int checkId, [FromBody]object check)
         {
-            return _resource.ModifyCheck(checkId, check);
+            return await _resource.ModifyCheck(checkId, check);
         }
 
         // PUT api/checks/5
-        public dynamic Put([FromBody]ModifyMultipleChecksRequest request)
+        public dynamic Put([FromBody]object request)
         {
             return request;//_resource.ModifyMultipleChecks(request);
         }
