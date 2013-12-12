@@ -7,10 +7,11 @@ namespace Vtex.HRM.Web
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/bundles/css/third-party-styles")
+            bundles.Add(new StyleBundle("~/bundles/css/all")
                 .Include("~/Content/bootstrap.css",
                          "~/Content/bootstrap-responsive.css",
-                         "~/Content/font-awesome.css"));
+                         "~/Content/font-awesome.css",
+                         "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/third-party-scripts")
                 .Include("~/Scripts/jquery-{version}.js")

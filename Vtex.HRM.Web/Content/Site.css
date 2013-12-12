@@ -3,7 +3,7 @@
     background: #efefef;
 }
 
-.brand{
+.brand {
     background: url("/Content/images/hrm-icon.png") no-repeat top 4px left 20px;
 }
 
@@ -14,6 +14,7 @@
     padding: 20px;
     background: #ffffff;
 }
+
     .detail.inverse {
         background: #f5f5f5;
     }
@@ -21,6 +22,7 @@
 .detail-tabs {
     margin-bottom: 0;
 }
+
     .detail-tabs.inverse > li.active > a {
         background: #f5f5f5;
     }
@@ -35,7 +37,12 @@
 }
 
 @media(max-width: 980px) {
-    body{ padding-top: 0; }
+    body;
+
+{
+    padding-top: 0;
+}
+
 }
 
 @media (max-width: 480px) {
