@@ -46,32 +46,6 @@
 
     <!-- Le javascript bundles -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript">
-        var files = ["@Scripts.Url("~/bundles/js/third-party-scripts")",
-                     "@Scripts.Url("~/bundles/js/app")"];
-
-        // Add a script element as a child of the body
-        var downloadJSAtOnload = function (files) {
-            var index;
-            for (index = 0; index < files.length; ++index) {
-                var src = files[index];
-                var element = document.createElement("script");
-                element.src = src;
-                document.body.appendChild(element);
-            }
-        };
-
-        var downloadJs = function() {
-            downloadJSAtOnload(files);
-        };
-
-        // Check for browser support of event handling capability
-        if (window.addEventListener)
-            window.addEventListener("load", downloadJs, false);
-        else if (window.attachEvent)
-            window.attachEvent("onload", downloadJs);
-        else window.onload = downloadJs;
-
-    </script>
+    @Scripts.Render("~/bundles/js/third-party-scripts", "~/bundles/js/app")
 </body>
 </html>
