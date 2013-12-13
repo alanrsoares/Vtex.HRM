@@ -10,7 +10,6 @@ namespace Vtex.HRM.Web
             bundles.Add(new StyleBundle("~/bundles/css/all")
                 .Include("~/Content/bootstrap.css",
                          "~/Content/bootstrap-responsive.css",
-                         "~/Content/font-awesome.css",
                          "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/third-party-scripts")
