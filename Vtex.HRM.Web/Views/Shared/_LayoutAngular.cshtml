@@ -14,7 +14,6 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="~/favicon.ico">
 </head>
@@ -29,8 +28,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#" style="padding-left: 60px">VTEX-HRM
-            </a>
+                <a class="brand" href="#" style="padding-left: 60px">
+                    VTEX-HRM
+                </a>
                 <div id="collapser" class="nav-collapse">
                     <ul class="nav">
                         <li data-match-route="/resources"><a href="#/resources">Resources</a></li>
@@ -46,8 +46,32 @@
 
     <!-- Le javascript bundles -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+        var files = ["@Scripts.Url("~/bundles/js/third-party-scripts")",
+                     "@Scripts.Url("~/bundles/js/app")"];
 
-    @Scripts.Render("~/bundles/js/third-party-scripts",
-                    "~/bundles/js/app")
+        // Add a script element as a child of the body
+        var downloadJSAtOnload = function (files) {
+            var index;
+            for (index = 0; index < files.length; ++index) {
+                var src = files[index];
+                var element = document.createElement("script");
+                element.src = src;
+                document.body.appendChild(element);
+            }
+        };
+
+        var downloadJs = function() {
+            downloadJSAtOnload(files);
+        };
+
+        // Check for browser support of event handling capability
+        if (window.addEventListener)
+            window.addEventListener("load", downloadJs, false);
+        else if (window.attachEvent)
+            window.attachEvent("onload", downloadJs);
+        else window.onload = downloadJs;
+
+    </script>
 </body>
 </html>
